@@ -7,6 +7,7 @@ package br.com.projeto.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -20,13 +21,12 @@ public class ConnectionFactory {
             
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/bdvendas", "usuariocurso", "123");
             
-        } catch(Exception erro) {
+        } catch(SQLException erro) {
             
             throw new RuntimeException(erro);
             
         }
         
-        return null;
     }
     
 }
