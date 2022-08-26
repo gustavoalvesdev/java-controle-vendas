@@ -5,7 +5,7 @@
  */
 package br.com.projeto.view;
 
-import ClienteDAO.ClienteDAO;
+import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.model.Cliente;
 import javax.swing.JOptionPane;
 
