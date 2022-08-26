@@ -7,13 +7,44 @@ package br.com.projeto.view;
 
 import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.model.Cliente;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Gustavo
  */
 public class FrmClientes extends javax.swing.JFrame {
+    
+    public void listar() {
+        
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> lista = dao.listarClientes();
+        DefaultTableModel dados = (DefaultTableModel) jTblConsultaCliente.getModel();
+        dados.setNumRows(0);
+        
+        for (Cliente c: lista) {
+            
+            dados.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getRg(),
+                c.getCpf(),
+                c.getEmail(),
+                c.getTelefone(),
+                c.getCelular(),
+                c.getCep(),
+                c.getEndereco(),
+                c.getNumero(),
+                c.getComplemento(),
+                c.getBairro(),
+                c.getCidade(),
+                c.getUf()
+            });
+            
+        }
+    }
 
     /**
      * Creates new form FrmClientes
@@ -76,6 +107,11 @@ public class FrmClientes extends javax.swing.JFrame {
         jBtnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(102, 153, 255));
 
@@ -334,7 +370,7 @@ public class FrmClientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Nome", "RG", "E-mail", "Telefone", "Celular", "CEP", "Endereço", "Nº", "Comp", "Bairro", "Cidade", "UF"
+                "Código", "Nome", "RG", "CPF", "E-mail", "Telefone", "Celular", "CEP", "Endereço", "Nº", "Comp", "Bairro", "Cidade", "UF"
             }
         ));
         jScrollPane1.setViewportView(jTblConsultaCliente);
@@ -475,6 +511,10 @@ public class FrmClientes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
         }
     }//GEN-LAST:event_jBtnSalvarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        listar();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
