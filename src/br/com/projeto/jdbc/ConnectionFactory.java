@@ -19,7 +19,7 @@ public class ConnectionFactory {
         
         try {
             
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/bdvendas", "usuariocurso", "123");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/bdvendas", "teste", "123");
             
         } catch(SQLException erro) {
             

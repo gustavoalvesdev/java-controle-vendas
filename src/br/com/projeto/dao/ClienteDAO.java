@@ -29,7 +29,7 @@ public class ClienteDAO {
     
     public void cadastrarCliente(Cliente obj) {
         
-        String sql = "INSERT INTO tb_clientes (nome, rg, cpf, email, telefone, celular, cep, endereco, numero, complemento, bairro, cidade, estado) " +
+        String sql = "INSERT INTO tb_clientes (nome, rg, cpf, email, celular, telefone, cep, endereco, numero, bairro, cidade, complemento, estado) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
@@ -40,14 +40,14 @@ public class ClienteDAO {
             stmt.setString(2, obj.getRg());
             stmt.setString(3, obj.getCpf());
             stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getTelefone());
-            stmt.setString(6, obj.getCelular());
+            stmt.setString(5, obj.getCelular());
+            stmt.setString(6, obj.getTelefone());
             stmt.setString(7, obj.getCep());
             stmt.setString(8, obj.getEndereco());
             stmt.setInt(9, obj.getNumero());
-            stmt.setString(10, obj.getComplemento());
-            stmt.setString(11, obj.getBairro());
-            stmt.setString(12, obj.getCidade());
+            stmt.setString(10, obj.getBairro());
+            stmt.setString(11, obj.getCidade());
+            stmt.setString(12, obj.getComplemento());
             stmt.setString(13, obj.getUf());
             
             stmt.execute();
@@ -62,8 +62,8 @@ public class ClienteDAO {
     }
     
     public void alterarCliente(Cliente obj) {
-        String sql = "UPDATE tb_clientes SET nome = ?, rg = ?, cpf = ?, email = ?, telefone = ?, celular = ?, cep = ?, endereco = ?, numero = ?"
-                + ", complemento = ?, bairro = ?, cidade = ?, estado = ? WHRE id = ?";
+        String sql = "UPDATE tb_clientes SET nome = ?, rg = ?, cpf = ?, email = ?, celular = ?, telefone = ?, cep = ?, endereco = ?, numero = ?"
+                + ", bairro = ?, cidade = ?, complemento = ?, estado = ? WHERE id = ?";
         
         try {
             
@@ -73,35 +73,35 @@ public class ClienteDAO {
             stmt.setString(2, obj.getRg());
             stmt.setString(3, obj.getCpf());
             stmt.setString(4, obj.getEmail());
-            stmt.setString(5, obj.getTelefone());
-            stmt.setString(6, obj.getCelular());
+            stmt.setString(5, obj.getCelular());
+            stmt.setString(6, obj.getTelefone());
             stmt.setString(7, obj.getCep());
             stmt.setString(8, obj.getEndereco());
             stmt.setInt(9, obj.getNumero());
-            stmt.setString(10, obj.getComplemento());
-            stmt.setString(11, obj.getBairro());
-            stmt.setString(12, obj.getCidade());
+            stmt.setString(10, obj.getBairro());
+            stmt.setString(11, obj.getCidade());
+            stmt.setString(12, obj.getComplemento());
             stmt.setString(13, obj.getUf());
             stmt.setInt(14, obj.getId());
             
             stmt.execute();
             stmt.close();
             
-            JOptionPane.showMessageDialog(null, "Cadastrado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Alterado com Sucesso!");
             
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + erro.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao alterar: " + erro.getMessage());
         }
     }
     
-    public void excluirCliente(Cliente obj) {
+    public void excluirCliente(int id) {
         String sql = "DELETE FROM tb_clientes WHERE id = ?";
         
         try {
             
             PreparedStatement stmt = con.prepareStatement(sql);
             
-            stmt.setInt(1, obj.getId());
+            stmt.setInt(1, id);
             
             stmt.execute();
             stmt.close();
@@ -134,14 +134,14 @@ public class ClienteDAO {
                 obj.setRg(rs.getString("rg"));
                 obj.setCpf(rs.getString("cpf"));
                 obj.setEmail(rs.getString("email"));
-                obj.setTelefone(rs.getString("telefone"));
                 obj.setCelular(rs.getString("celular"));
+                obj.setTelefone(rs.getString("telefone"));
                 obj.setCep(rs.getString("cep"));
                 obj.setEndereco(rs.getString("endereco"));
                 obj.setNumero(rs.getInt("numero"));
-                obj.setComplemento(rs.getString("complemento"));
                 obj.setBairro(rs.getString("bairro"));
                 obj.setCidade(rs.getString("cidade"));
+                obj.setComplemento(rs.getString("complemento"));
                 obj.setUf(rs.getString("estado"));
                 
                 lista.add(obj);
