@@ -16,16 +16,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Gustavo
  */
 public class FrmClientes extends javax.swing.JFrame {
-    
+
     public void listar() {
-        
+
         ClienteDAO dao = new ClienteDAO();
         List<Cliente> lista = dao.listarClientes();
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaCliente.getModel();
         dados.setNumRows(0);
-        
-        for (Cliente c: lista) {
-            
+
+        for (Cliente c : lista) {
+
             dados.addRow(new Object[]{
                 c.getId(),
                 c.getNome(),
@@ -42,7 +42,7 @@ public class FrmClientes extends javax.swing.JFrame {
                 c.getComplemento(),
                 c.getUf()
             });
-            
+
         }
     }
 
@@ -503,7 +503,7 @@ public class FrmClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
-            try {
+        try {
 
             Cliente obj = new Cliente();
             obj.setNome(jtfNome.getText());
@@ -523,8 +523,8 @@ public class FrmClientes extends javax.swing.JFrame {
             ClienteDAO dao = new ClienteDAO();
             dao.cadastrarCliente(obj);
 
-        } catch(NumberFormatException erro) {
-                JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
+        } catch (NumberFormatException erro) {
+            JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
         }
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
@@ -533,26 +533,32 @@ public class FrmClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void jTblConsultaClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblConsultaClienteMouseClicked
+
         // Pega os dados
-        jTpClientes.setSelectedIndex(0);
-        jtfCodigo.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 0).toString());
-        jtfNome.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 1).toString());
-        jFtfRg.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 2).toString());
-        jFtfCpf.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 3).toString());
-        jtfEmail.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 4).toString());
-        jFtfCelular.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 5).toString());
-        jFtfTelefone.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 6).toString());
-        jFtfCep.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 7).toString());
-        jTfEndereco.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 8).toString());
-        jTfNumero.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 9).toString());
-        jTfBairro.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 10).toString());
-        jTfCidade.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 11).toString());
-        jTfComplemento.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 12).toString());
-        jcbUf.setSelectedItem(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 13).toString());
+        try {
+            jTpClientes.setSelectedIndex(0);
+            jtfCodigo.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 0).toString());
+            jtfNome.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 1).toString());
+            jFtfRg.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 2).toString());
+            jFtfCpf.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 3).toString());
+            jtfEmail.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 4).toString());
+            jFtfCelular.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 5).toString());
+            jFtfTelefone.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 6).toString());
+            jFtfCep.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 7).toString());
+            jTfEndereco.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 8).toString());
+            jTfNumero.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 9).toString());
+            jTfBairro.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 10).toString());
+            jTfCidade.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 11).toString());
+            jTfComplemento.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 12).toString());
+            jcbUf.setSelectedItem(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 13).toString());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada!");
+        }
+
     }//GEN-LAST:event_jTblConsultaClienteMouseClicked
 
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
-            try {
+        try {
 
             Cliente obj = new Cliente();
             obj.setNome(jtfNome.getText());
@@ -573,21 +579,21 @@ public class FrmClientes extends javax.swing.JFrame {
             ClienteDAO dao = new ClienteDAO();
             dao.alterarCliente(obj);
 
-        } catch(NumberFormatException erro) {
-                JOptionPane.showMessageDialog(null, "Falha ao receber dados para alteração: " + erro.getMessage());
+        } catch (NumberFormatException erro) {
+            JOptionPane.showMessageDialog(null, "Falha ao receber dados para alteração: " + erro.getMessage());
         }
     }//GEN-LAST:event_jBtnEditarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-            try {
+        try {
 
             int id = Integer.valueOf(jtfCodigo.getText());
 
             ClienteDAO dao = new ClienteDAO();
             dao.excluirCliente(id);
 
-        } catch(NumberFormatException erro) {
-                JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());
+        } catch (NumberFormatException erro) {
+            JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 

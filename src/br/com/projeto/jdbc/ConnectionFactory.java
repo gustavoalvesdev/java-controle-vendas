@@ -15,11 +15,17 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
     
+    private final String dbHost = "localhost";
+    private final String dbPort = "3306";
+    private final String dbName = "BDVENDAS";
+    private final String dbUser = "root";
+    private final String dbPass = "";
+    
     public Connection getConnection() {
         
         try {
             
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/bdvendas", "teste", "123");
+            return DriverManager.getConnection("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName, dbUser, dbPass);
             
         } catch(SQLException erro) {
             
