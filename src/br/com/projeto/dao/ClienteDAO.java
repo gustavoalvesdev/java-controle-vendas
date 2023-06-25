@@ -156,4 +156,48 @@ public class ClienteDAO {
         
     }
     
+    // Método buscarClientPorNome
+    public List<Cliente> buscarClientPorNome(String nome) {
+        
+        try {
+            
+            List<Cliente> lista = new ArrayList<>();
+            
+            String sql = "SELECT * FROM tb_clientes WHERE nome LIKE ?";
+            
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%" + nome + "%");
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                
+                Cliente obj = new Cliente();
+                
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setUf(rs.getString("estado"));
+                
+                lista.add(obj);
+            }
+            
+            return lista;
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar clientes: " + e.getMessage());
+            return null;
+        }
+        
+    }
 }

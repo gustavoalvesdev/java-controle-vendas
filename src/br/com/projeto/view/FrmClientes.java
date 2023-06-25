@@ -362,9 +362,19 @@ public class FrmClientes extends javax.swing.JFrame {
         jLabel16.setText("Nome:");
 
         jtfConsultaNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtfConsultaNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfConsultaNomeKeyPressed(evt);
+            }
+        });
 
         jBtnPesquisar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
 
         jTblConsultaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -596,6 +606,42 @@ public class FrmClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
+
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
+
+    private void jtfConsultaNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfConsultaNomeKeyPressed
+        // Botão pesquisar
+
+        String nome = jtfConsultaNome.getText();
+
+        ClienteDAO dao = new ClienteDAO();
+        List<Cliente> lista = dao.buscarClientPorNome(nome);
+        DefaultTableModel dados = (DefaultTableModel) jTblConsultaCliente.getModel();
+        dados.setNumRows(0);
+
+        for (Cliente c : lista) {
+
+            dados.addRow(new Object[]{
+                c.getId(),
+                c.getNome(),
+                c.getRg(),
+                c.getCpf(),
+                c.getEmail(),
+                c.getCelular(),
+                c.getTelefone(),
+                c.getCep(),
+                c.getEndereco(),
+                c.getNumero(),
+                c.getBairro(),
+                c.getCidade(),
+                c.getComplemento(),
+                c.getUf()
+            });
+
+        }
+    }//GEN-LAST:event_jtfConsultaNomeKeyPressed
 
     /**
      * @param args the command line arguments
