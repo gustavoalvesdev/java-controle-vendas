@@ -8,6 +8,7 @@ package br.com.projeto.view;
 import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.model.Cliente;
 import br.com.projeto.model.Utilitarios;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -188,6 +189,11 @@ public class FrmClientes extends javax.swing.JFrame {
         jFtfCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFtfCepActionPerformed(evt);
+            }
+        });
+        jFtfCep.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jFtfCepKeyPressed(evt);
             }
         });
 
@@ -721,6 +727,30 @@ public class FrmClientes extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jBtnBuscarPorCPFActionPerformed
+
+    private void jFtfCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFtfCepKeyPressed
+        // Busca por CEP quando teclar Enter
+
+        //Programacao do keypress
+        try {
+            if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                Cliente obj = new Cliente();
+                ClienteDAO dao = new ClienteDAO();
+                obj = dao.buscaCep(jFtfCep.getText());
+
+                jTfEndereco.setText(obj.getEndereco());
+                jTfBairro.setText(obj.getBairro());
+                jTfCidade.setText(obj.getCidade());
+                jcbUf.setSelectedItem(obj.getUf());
+
+                jTfNumero.requestFocus();
+
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Endereço não encontrado!");
+        }
+
+    }//GEN-LAST:event_jFtfCepKeyPressed
 
     /**
      * @param args the command line arguments
