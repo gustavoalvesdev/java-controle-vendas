@@ -156,6 +156,53 @@ public class ClienteDAO {
         
     }
     
+    // Método consultaCliente por CPF
+    public Cliente consultaPorCpf(String cpf) {
+    
+        try {
+            
+            String sql = "SELECT * FROM tb_clientes WHERE cpf = ?";
+            
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, cpf);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            Cliente obj = new Cliente();
+            
+            if (rs.next()) {
+
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setRg(rs.getString("rg"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setEmail(rs.getString("email"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setUf(rs.getString("estado"));
+                
+                return obj;
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+            }
+            
+            
+            
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao buscar por CPF: " + e.getMessage());
+        }
+        
+        return null;
+    }
+    
+    
     // Método buscarClientPorNome
     public List<Cliente> buscarClientPorNome(String nome) {
         

@@ -7,6 +7,7 @@ package br.com.projeto.view;
 
 import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.model.Cliente;
+import br.com.projeto.model.Utilitarios;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -425,6 +426,11 @@ public class FrmClientes extends javax.swing.JFrame {
 
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnNovo.setText("NOVO");
+        jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNovoActionPerformed(evt);
+            }
+        });
 
         jBtnSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnSalvar.setText("SALVAR");
@@ -532,6 +538,8 @@ public class FrmClientes extends javax.swing.JFrame {
 
             ClienteDAO dao = new ClienteDAO();
             dao.cadastrarCliente(obj);
+            
+            new Utilitarios().limpaTela(jPnCadastro);
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
@@ -588,6 +596,8 @@ public class FrmClientes extends javax.swing.JFrame {
 
             ClienteDAO dao = new ClienteDAO();
             dao.alterarCliente(obj);
+            
+            new Utilitarios().limpaTela(jPnCadastro);
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para alteração: " + erro.getMessage());
@@ -601,6 +611,8 @@ public class FrmClientes extends javax.swing.JFrame {
 
             ClienteDAO dao = new ClienteDAO();
             dao.excluirCliente(id);
+            
+            new Utilitarios().limpaTela(jPnCadastro);
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());
@@ -642,6 +654,10 @@ public class FrmClientes extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jtfConsultaNomeKeyPressed
+
+    private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
+            new Utilitarios().limpaTela(jPnCadastro);
+    }//GEN-LAST:event_jBtnNovoActionPerformed
 
     /**
      * @param args the command line arguments
