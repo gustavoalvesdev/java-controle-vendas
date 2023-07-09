@@ -16,10 +16,10 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     
     private final String dbHost = "localhost";
-    private final String dbPort = "3306";
+    private final String dbPort = "3307";
     private final String dbName = "BDVENDAS";
     private final String dbUser = "root";
-    private final String dbPass = "";
+    private final String dbPass = "usbw";
     
     public Connection getConnection() {
         
