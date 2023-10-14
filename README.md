@@ -1,1 +1,1 @@
-# java-controle-vendas
+# Sistema Controle de Vendas Java
