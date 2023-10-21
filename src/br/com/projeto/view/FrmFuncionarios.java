@@ -5,9 +5,7 @@
  */
 package br.com.projeto.view;
 
-import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.dao.FuncionarioDAO;
-import br.com.projeto.model.Cliente;
 import br.com.projeto.model.Funcionario;
 import br.com.projeto.model.Utilitarios;
 import java.awt.event.KeyEvent;
@@ -23,12 +21,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
     public void listar() {
 
-        ClienteDAO dao = new ClienteDAO();
-        List<Cliente> lista = dao.listarClientes();
+        FuncionarioDAO dao = new FuncionarioDAO();
+        List<Funcionario> lista = dao.listarFuncionarios();
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaFuncionario.getModel();
         dados.setNumRows(0);
 
-        for (Cliente c : lista) {
+        for (Funcionario c : lista) {
 
             dados.addRow(new Object[]{
                 c.getId(),
@@ -36,6 +34,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 c.getRg(),
                 c.getCpf(),
                 c.getEmail(),
+                c.getSenha(),
+                c.getCargo(),
+                c.getNivelAcesso(),
                 c.getCelular(),
                 c.getTelefone(),
                 c.getCep(),
@@ -70,7 +71,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTpClientes = new javax.swing.JTabbedPane();
+        jTpFuncionarios = new javax.swing.JTabbedPane();
         jPnCadastro = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtfCodigo = new javax.swing.JTextField();
@@ -449,7 +450,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTpClientes.addTab("Dados Pessoais", jPnCadastro);
+        jTpFuncionarios.addTab("Dados Pessoais", jPnCadastro);
 
         jPnConsulta.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -500,7 +501,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                         .addComponent(jtfConsultaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 355, Short.MAX_VALUE)))
+                        .addGap(0, 387, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPnConsultaLayout.setVerticalGroup(
@@ -516,10 +517,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addContainerGap(71, Short.MAX_VALUE))
         );
 
-        jTpClientes.addTab("Consulta de Funcionários", jPnConsulta);
+        jTpFuncionarios.addTab("Consulta de Funcionários", jPnConsulta);
 
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/new-32.png"))); // NOI18N
         jBtnNovo.setText("NOVO");
+        jBtnNovo.setEnabled(false);
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnNovoActionPerformed(evt);
@@ -527,6 +530,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         jBtnSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/save-32.png"))); // NOI18N
         jBtnSalvar.setText("SALVAR");
         jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -535,7 +539,10 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         jBtnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/edit-32.png"))); // NOI18N
         jBtnEditar.setText("EDITAR");
+        jBtnEditar.setToolTipText("");
+        jBtnEditar.setEnabled(false);
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEditarActionPerformed(evt);
@@ -543,7 +550,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         jBtnExcluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/delete-32.png"))); // NOI18N
         jBtnExcluir.setText("EXCLUIR");
+        jBtnExcluir.setEnabled(false);
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnExcluirActionPerformed(evt);
@@ -555,9 +564,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTpClientes)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(211, 211, 211)
+            .addComponent(jTpFuncionarios)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBtnSalvar)
@@ -565,7 +574,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addComponent(jBtnEditar)
                 .addGap(18, 18, 18)
                 .addComponent(jBtnExcluir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(108, 108, 108))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jBtnEditar, jBtnExcluir, jBtnNovo, jBtnSalvar});
@@ -575,10 +584,10 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTpClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addComponent(jTpFuncionarios)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnNovo)
                     .addComponent(jBtnSalvar)
                     .addComponent(jBtnEditar)
                     .addComponent(jBtnExcluir))
@@ -591,7 +600,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 863, Short.MAX_VALUE)
+            .addGap(0, 895, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -603,9 +612,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             .addGap(0, 546, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 21, Short.MAX_VALUE)
+                    .addGap(0, 20, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 21, Short.MAX_VALUE)))
+                    .addGap(0, 20, Short.MAX_VALUE)))
         );
 
         pack();
@@ -637,6 +646,29 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             dao.cadastrarFuncionario(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
+            
+            jBtnSalvar.setEnabled(false);
+            jBtnEditar.setEnabled(false);
+            jBtnExcluir.setEnabled(false);
+            jBtnNovo.setEnabled(true);
+
+            jtfNome.setEnabled(false);
+            jFtfRg.setEnabled(false);
+            jFtfCpf.setEnabled(false);
+            jtfEmail.setEnabled(false);
+            jFtfCelular.setEnabled(false);
+            jFtfTelefone.setEnabled(false);
+            jFtfCep.setEnabled(false);
+            jTfEndereco.setEnabled(false);
+            jTfNumero.setEnabled(false);
+            jTfBairro.setEnabled(false);
+            jTfCidade.setEnabled(false);
+            jTfComplemento.setEnabled(false);
+            jcbUf.setEnabled(false);
+            jPfSenha.setEnabled(false);
+            jTfCargo.setEnabled(false);
+            jcbNivelAcesso.setEnabled(false);
+            jBtnBuscarPorCPF.setEnabled(false);
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
@@ -651,21 +683,48 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
         // Pega os dados
         try {
-            jTpClientes.setSelectedIndex(0);
+            jTpFuncionarios.setSelectedIndex(0);
             jtfCodigo.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 0).toString());
             jtfNome.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 1).toString());
             jFtfRg.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 2).toString());
             jFtfCpf.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 3).toString());
             jtfEmail.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 4).toString());
-            jFtfCelular.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 5).toString());
-            jFtfTelefone.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 6).toString());
-            jFtfCep.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 7).toString());
-            jTfEndereco.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 8).toString());
-            jTfNumero.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 9).toString());
-            jTfBairro.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 10).toString());
-            jTfCidade.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 11).toString());
-            jTfComplemento.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 12).toString());
-            jcbUf.setSelectedItem(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 13).toString());
+            jPfSenha.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 5).toString());
+            jTfCargo.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 6).toString());
+            jcbNivelAcesso.setSelectedItem(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 7).toString());
+            jFtfCelular.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 8).toString());
+            jFtfTelefone.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 9).toString());
+            jFtfCep.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 10).toString());
+            jTfEndereco.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 11).toString());
+            jTfNumero.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 12).toString());
+            jTfBairro.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 13).toString());
+            jTfCidade.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 14).toString());
+            jTfComplemento.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 15).toString());
+            jcbUf.setSelectedItem(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 16).toString());
+            
+            jtfNome.setEnabled(true);
+            jFtfRg.setEnabled(true);
+            jFtfCpf.setEnabled(true);
+            jtfEmail.setEnabled(true);
+            jFtfCelular.setEnabled(true);
+            jFtfTelefone.setEnabled(true);
+            jFtfCep.setEnabled(true);
+            jTfEndereco.setEnabled(true);
+            jTfNumero.setEnabled(true);
+            jTfBairro.setEnabled(true);
+            jTfCidade.setEnabled(true);
+            jTfComplemento.setEnabled(true);
+            jcbUf.setEnabled(true);
+            jPfSenha.setEnabled(true);
+            jTfCargo.setEnabled(true);
+            jcbNivelAcesso.setEnabled(true);
+            jBtnBuscarPorCPF.setEnabled(true);
+            
+            jBtnNovo.setEnabled(true);
+            jBtnEditar.setEnabled(true);
+            jBtnExcluir.setEnabled(true);
+            jBtnSalvar.setEnabled(false);
+            
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada!");
         }
@@ -675,11 +734,14 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         try {
 
-            Cliente obj = new Cliente();
+            Funcionario obj = new Funcionario();
             obj.setNome(jtfNome.getText());
             obj.setRg(jFtfRg.getText());
             obj.setCpf(jFtfCpf.getText());
             obj.setEmail(jtfEmail.getText());
+            obj.setSenha(jPfSenha.getText());
+            obj.setCargo(jTfCargo.getText());
+            obj.setNivelAcesso(jcbNivelAcesso.getSelectedItem().toString());
             obj.setTelefone(jFtfTelefone.getText());
             obj.setCelular(jFtfCelular.getText());
             obj.setCep(jFtfCep.getText());
@@ -691,10 +753,33 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             obj.setUf(jcbUf.getSelectedItem().toString());
             obj.setId(Integer.valueOf(jtfCodigo.getText()));
 
-            ClienteDAO dao = new ClienteDAO();
-            dao.alterarCliente(obj);
+            FuncionarioDAO dao = new FuncionarioDAO();
+            dao.alterarFuncionario(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
+            
+            jtfNome.setEnabled(false);
+            jFtfRg.setEnabled(false);
+            jFtfCpf.setEnabled(false);
+            jtfEmail.setEnabled(false);
+            jFtfCelular.setEnabled(false);
+            jFtfTelefone.setEnabled(false);
+            jFtfCep.setEnabled(false);
+            jTfEndereco.setEnabled(false);
+            jTfNumero.setEnabled(false);
+            jTfBairro.setEnabled(false);
+            jTfCidade.setEnabled(false);
+            jTfComplemento.setEnabled(false);
+            jcbUf.setEnabled(false);
+            jPfSenha.setEnabled(false);
+            jTfCargo.setEnabled(false);
+            jcbNivelAcesso.setEnabled(false);
+            jBtnBuscarPorCPF.setEnabled(false);
+            
+            jBtnSalvar.setEnabled(false);
+            jBtnEditar.setEnabled(false);
+            jBtnExcluir.setEnabled(false);
+            jBtnNovo.setEnabled(true);
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para alteração: " + erro.getMessage());
@@ -706,11 +791,33 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
             int id = Integer.valueOf(jtfCodigo.getText());
 
-            ClienteDAO dao = new ClienteDAO();
-            dao.excluirCliente(id);
+            FuncionarioDAO dao = new FuncionarioDAO();
+            dao.excluirFuncionario(id);
 
             new Utilitarios().limpaTela(jPnCadastro);
-
+            
+            jtfNome.setEnabled(false);
+            jFtfRg.setEnabled(false);
+            jFtfCpf.setEnabled(false);
+            jtfEmail.setEnabled(false);
+            jFtfCelular.setEnabled(false);
+            jFtfTelefone.setEnabled(false);
+            jFtfCep.setEnabled(false);
+            jTfEndereco.setEnabled(false);
+            jTfNumero.setEnabled(false);
+            jTfBairro.setEnabled(false);
+            jTfCidade.setEnabled(false);
+            jTfComplemento.setEnabled(false);
+            jcbUf.setEnabled(false);
+            jPfSenha.setEnabled(false);
+            jTfCargo.setEnabled(false);
+            jcbNivelAcesso.setEnabled(false);
+            jBtnBuscarPorCPF.setEnabled(false);
+            
+            jBtnSalvar.setEnabled(false);
+            jBtnEditar.setEnabled(false);
+            jBtnExcluir.setEnabled(false);
+            jBtnNovo.setEnabled(true);
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());
         }
@@ -725,12 +832,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
         String nome = jtfConsultaNome.getText();
 
-        ClienteDAO dao = new ClienteDAO();
-        List<Cliente> lista = dao.buscarClientPorNome(nome);
+        FuncionarioDAO dao = new FuncionarioDAO();
+        List<Funcionario> lista = dao.buscarFuncionarioPorNome(nome);
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaFuncionario.getModel();
         dados.setNumRows(0);
 
-        for (Cliente c : lista) {
+        lista.forEach((c) -> {
 
             dados.addRow(new Object[]{
                 c.getId(),
@@ -738,6 +845,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 c.getRg(),
                 c.getCpf(),
                 c.getEmail(),
+                c.getSenha(),
+                c.getCargo(),
+                c.getNivelAcesso(),
                 c.getCelular(),
                 c.getTelefone(),
                 c.getCep(),
@@ -748,12 +858,35 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 c.getComplemento(),
                 c.getUf()
             });
-
-        }
+        });
+        ;
     }//GEN-LAST:event_jtfConsultaNomeKeyPressed
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         new Utilitarios().limpaTela(jPnCadastro);
+        jtfNome.requestFocus();
+        jBtnNovo.setEnabled(false);
+        jBtnSalvar.setEnabled(true);
+        jBtnEditar.setEnabled(false);
+        jBtnExcluir.setEnabled(false);
+        
+        jtfNome.setEnabled(true);
+            jFtfRg.setEnabled(true);
+            jFtfCpf.setEnabled(true);
+            jtfEmail.setEnabled(true);
+            jFtfCelular.setEnabled(true);
+            jFtfTelefone.setEnabled(true);
+            jFtfCep.setEnabled(true);
+            jTfEndereco.setEnabled(true);
+            jTfNumero.setEnabled(true);
+            jTfBairro.setEnabled(true);
+            jTfCidade.setEnabled(true);
+            jTfComplemento.setEnabled(true);
+            jcbUf.setEnabled(true);
+            jPfSenha.setEnabled(true);
+            jTfCargo.setEnabled(true);
+            jcbNivelAcesso.setEnabled(true);
+            jBtnBuscarPorCPF.setEnabled(true);
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jFtfCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFtfCepActionPerformed
@@ -765,9 +898,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
         String cpf = jFtfCpf.getText();
 
-        Cliente obj = new Cliente();
+        Funcionario obj;
 
-        ClienteDAO dao = new ClienteDAO();
+        FuncionarioDAO dao = new FuncionarioDAO();
 
         obj = dao.consultaPorCpf(cpf);
 
@@ -777,6 +910,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jtfNome.setText(obj.getNome());
             jFtfRg.setText(obj.getRg());
             jtfEmail.setText(obj.getEmail());
+            jPfSenha.setText(obj.getSenha());
+            jTfCargo.setText(obj.getCargo());
+            jcbNivelAcesso.setSelectedItem(obj.getNivelAcesso());
             jFtfTelefone.setText(obj.getTelefone());
             jFtfCelular.setText(obj.getCelular());
             jFtfCep.setText(obj.getCep());
@@ -786,19 +922,24 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jTfBairro.setText(obj.getBairro());
             jTfCidade.setText(obj.getCidade());
             jcbUf.setSelectedItem(obj.getUf());
+            
+            jBtnEditar.setEnabled(true);
+            jBtnExcluir.setEnabled(true);
+            jBtnSalvar.setEnabled(false);
+            jBtnNovo.setEnabled(true);
         }
-
+        
+//;
 
     }//GEN-LAST:event_jBtnBuscarPorCPFActionPerformed
 
     private void jFtfCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFtfCepKeyPressed
         // Busca por CEP quando teclar Enter
 
-        //Programacao do keypress
         try {
             if (evt.getKeyCode() == KeyEvent.VK_TAB || evt.getKeyCode() == KeyEvent.VK_ENTER) {
-                Cliente obj = new Cliente();
-                ClienteDAO dao = new ClienteDAO();
+                Funcionario obj = new Funcionario();
+                FuncionarioDAO dao = new FuncionarioDAO();
                 obj = dao.buscaCep(jFtfCep.getText());
 
                 jTfEndereco.setText(obj.getEndereco());
@@ -899,7 +1040,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private javax.swing.JTextField jTfComplemento;
     private javax.swing.JTextField jTfEndereco;
     private javax.swing.JTextField jTfNumero;
-    private javax.swing.JTabbedPane jTpClientes;
+    private javax.swing.JTabbedPane jTpFuncionarios;
     private javax.swing.JComboBox<String> jcbNivelAcesso;
     private javax.swing.JComboBox<String> jcbUf;
     private javax.swing.JTextField jtfCodigo;

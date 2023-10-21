@@ -6,6 +6,7 @@
 package br.com.projeto.model;
 
 import java.awt.Component;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -23,6 +24,10 @@ public class Utilitarios {
             
             if (component instanceof JTextField) {
                 ((JTextField) component).setText(null);
+            }
+            
+            if (component instanceof JComboBox) {
+                ((JComboBox) component).setSelectedIndex(0);
             }
             
         }
