@@ -9,6 +9,7 @@ import br.com.projeto.jdbc.ConnectionFactory;
 import java.sql.Connection;
 import br.com.projeto.model.Funcionario;
 import br.com.projeto.model.WebServiceCep;
+import br.com.projeto.view.FrmMenu;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,13 +24,15 @@ import javax.swing.JOptionPane;
 public class FuncionarioDAO {
     private Connection con;
     
+    private String tabela = "tb_funcionarios";
+    
     public FuncionarioDAO() {
         this.con = new ConnectionFactory().getConnection();
     }
     
     public void cadastrarFuncionario(Funcionario obj) {
         
-        String sql = "INSERT INTO tb_funcionarios (nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, telefone, cep, endereco, numero, bairro, cidade, complemento, estado) " +
+        String sql = "INSERT INTO " + tabela + " (nome, rg, cpf, email, senha, cargo, nivel_acesso, celular, telefone, cep, endereco, numero, bairro, cidade, complemento, estado) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try {
@@ -65,7 +68,7 @@ public class FuncionarioDAO {
     }
     
     public void alterarFuncionario(Funcionario obj) {
-        String sql = "UPDATE tb_funcionarios SET nome = ?, rg = ?, cpf = ?, email = ?, senha = ?, cargo = ?, nivel_acesso = ?, celular = ?, telefone = ?, cep = ?, endereco = ?, numero = ?"
+        String sql = "UPDATE " + tabela + " SET nome = ?, rg = ?, cpf = ?, email = ?, senha = ?, cargo = ?, nivel_acesso = ?, celular = ?, telefone = ?, cep = ?, endereco = ?, numero = ?"
                 + ", bairro = ?, cidade = ?, complemento = ?, estado = ? WHERE id = ?";
         
         try {
@@ -106,7 +109,7 @@ public class FuncionarioDAO {
             
             List<Funcionario> lista = new ArrayList<>();
             
-            String sql = "SELECT * FROM tb_funcionarios";
+            String sql = "SELECT * FROM " + tabela;
             
             PreparedStatement stmt = con.prepareStatement(sql);
             
@@ -170,7 +173,7 @@ public class FuncionarioDAO {
     
         try {
             
-            String sql = "SELECT * FROM tb_funcionarios WHERE cpf = ?";
+            String sql = "SELECT * FROM " + tabela + " WHERE cpf = ?";
             
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, cpf);
@@ -220,7 +223,7 @@ public class FuncionarioDAO {
             
             List<Funcionario> lista = new ArrayList<>();
             
-            String sql = "SELECT * FROM tb_funcionarios WHERE nome LIKE ?";
+            String sql = "SELECT * FROM " + tabela + " WHERE nome LIKE ?";
             
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, "%" + nome + "%");
@@ -262,7 +265,7 @@ public class FuncionarioDAO {
     }
     
     public void excluirFuncionario(int id) {
-        String sql = "DELETE FROM tb_funcionarios WHERE id = ?";
+        String sql = "DELETE FROM " + tabela + " WHERE id = ?";
         
         try {
             
@@ -277,6 +280,32 @@ public class FuncionarioDAO {
             
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir: " + erro.getMessage());
+        }
+    }
+    
+    public void efetuarLogin(String email, String senha) {
+        try {
+            
+            String sql = "SELECT * FROM " + tabela + " WHERE email = ? AND senha = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            // Usuário conseguiu logar no sistema
+            if (rs.next()) {
+                
+                JOptionPane.showMessageDialog(null, "Bem-vindo(a) ao sistema!");
+                FrmMenu tela = new FrmMenu();
+                tela.setVisible(true);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário e/ou senha incorreto(s)!");
+            }
+            
+        } catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
         }
     }
 }

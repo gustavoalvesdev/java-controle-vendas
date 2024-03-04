@@ -5,6 +5,9 @@
  */
 package br.com.projeto.view;
 
+import br.com.projeto.dao.FuncionarioDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gusta
@@ -62,7 +65,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("GMB SOFT 1.0 - AUTENTICAÇÃO");
 
         jPanel3.setBackground(new java.awt.Color(102, 153, 255));
@@ -169,7 +172,17 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
-        // TODO add your handling code here:
+        try {
+            
+            String email = jTfEmail.getText();
+            String senha = jPfSenha.getText();
+            
+            FuncionarioDAO dao = new FuncionarioDAO();
+            dao.efetuarLogin(email, senha);
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro na Tela de Login: " + e.getMessage());
+        }
     }//GEN-LAST:event_jBtnEntrarActionPerformed
 
     /**
