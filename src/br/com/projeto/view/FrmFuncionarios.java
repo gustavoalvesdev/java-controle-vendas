@@ -646,7 +646,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             dao.cadastrarFuncionario(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
-            
+
             jBtnSalvar.setEnabled(false);
             jBtnEditar.setEnabled(false);
             jBtnExcluir.setEnabled(false);
@@ -654,7 +654,6 @@ public class FrmFuncionarios extends javax.swing.JFrame {
 
             jtfNome.setEnabled(false);
             jFtfRg.setEnabled(false);
-            jFtfCpf.setEnabled(false);
             jtfEmail.setEnabled(false);
             jFtfCelular.setEnabled(false);
             jFtfTelefone.setEnabled(false);
@@ -668,7 +667,6 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jPfSenha.setEnabled(false);
             jTfCargo.setEnabled(false);
             jcbNivelAcesso.setEnabled(false);
-            jBtnBuscarPorCPF.setEnabled(false);
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
@@ -701,7 +699,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jTfCidade.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 14).toString());
             jTfComplemento.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 15).toString());
             jcbUf.setSelectedItem(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 16).toString());
-            
+
             jtfNome.setEnabled(true);
             jFtfRg.setEnabled(true);
             jFtfCpf.setEnabled(true);
@@ -719,12 +717,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jTfCargo.setEnabled(true);
             jcbNivelAcesso.setEnabled(true);
             jBtnBuscarPorCPF.setEnabled(true);
-            
+
             jBtnNovo.setEnabled(true);
             jBtnEditar.setEnabled(true);
             jBtnExcluir.setEnabled(true);
             jBtnSalvar.setEnabled(false);
-            
+
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada!");
         }
@@ -757,7 +755,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             dao.alterarFuncionario(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
-            
+
             jtfNome.setEnabled(false);
             jFtfRg.setEnabled(false);
             jFtfCpf.setEnabled(false);
@@ -775,7 +773,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jTfCargo.setEnabled(false);
             jcbNivelAcesso.setEnabled(false);
             jBtnBuscarPorCPF.setEnabled(false);
-            
+
             jBtnSalvar.setEnabled(false);
             jBtnEditar.setEnabled(false);
             jBtnExcluir.setEnabled(false);
@@ -795,7 +793,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             dao.excluirFuncionario(id);
 
             new Utilitarios().limpaTela(jPnCadastro);
-            
+
             jtfNome.setEnabled(false);
             jFtfRg.setEnabled(false);
             jFtfCpf.setEnabled(false);
@@ -813,7 +811,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jTfCargo.setEnabled(false);
             jcbNivelAcesso.setEnabled(false);
             jBtnBuscarPorCPF.setEnabled(false);
-            
+
             jBtnSalvar.setEnabled(false);
             jBtnEditar.setEnabled(false);
             jBtnExcluir.setEnabled(false);
@@ -869,24 +867,24 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jBtnSalvar.setEnabled(true);
         jBtnEditar.setEnabled(false);
         jBtnExcluir.setEnabled(false);
-        
+
         jtfNome.setEnabled(true);
-            jFtfRg.setEnabled(true);
-            jFtfCpf.setEnabled(true);
-            jtfEmail.setEnabled(true);
-            jFtfCelular.setEnabled(true);
-            jFtfTelefone.setEnabled(true);
-            jFtfCep.setEnabled(true);
-            jTfEndereco.setEnabled(true);
-            jTfNumero.setEnabled(true);
-            jTfBairro.setEnabled(true);
-            jTfCidade.setEnabled(true);
-            jTfComplemento.setEnabled(true);
-            jcbUf.setEnabled(true);
-            jPfSenha.setEnabled(true);
-            jTfCargo.setEnabled(true);
-            jcbNivelAcesso.setEnabled(true);
-            jBtnBuscarPorCPF.setEnabled(true);
+        jFtfRg.setEnabled(true);
+        jFtfCpf.setEnabled(true);
+        jtfEmail.setEnabled(true);
+        jFtfCelular.setEnabled(true);
+        jFtfTelefone.setEnabled(true);
+        jFtfCep.setEnabled(true);
+        jTfEndereco.setEnabled(true);
+        jTfNumero.setEnabled(true);
+        jTfBairro.setEnabled(true);
+        jTfCidade.setEnabled(true);
+        jTfComplemento.setEnabled(true);
+        jcbUf.setEnabled(true);
+        jPfSenha.setEnabled(true);
+        jTfCargo.setEnabled(true);
+        jcbNivelAcesso.setEnabled(true);
+        jBtnBuscarPorCPF.setEnabled(true);
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jFtfCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFtfCepActionPerformed
@@ -922,14 +920,32 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jTfBairro.setText(obj.getBairro());
             jTfCidade.setText(obj.getCidade());
             jcbUf.setSelectedItem(obj.getUf());
-            
+
+            jtfNome.setEnabled(true);
+            jFtfRg.setEnabled(true);
+            jFtfCpf.setEnabled(true);
+            jtfEmail.setEnabled(true);
+            jFtfCelular.setEnabled(true);
+            jFtfTelefone.setEnabled(true);
+            jFtfCep.setEnabled(true);
+            jTfEndereco.setEnabled(true);
+            jTfNumero.setEnabled(true);
+            jTfBairro.setEnabled(true);
+            jTfCidade.setEnabled(true);
+            jTfComplemento.setEnabled(true);
+            jcbUf.setEnabled(true);
+            jPfSenha.setEnabled(true);
+            jTfCargo.setEnabled(true);
+            jcbNivelAcesso.setEnabled(true);
+            jBtnBuscarPorCPF.setEnabled(true);
+
             jBtnEditar.setEnabled(true);
             jBtnExcluir.setEnabled(true);
             jBtnSalvar.setEnabled(false);
             jBtnNovo.setEnabled(true);
         }
-        
-//;
+
+        jtfNome.requestFocus();
 
     }//GEN-LAST:event_jBtnBuscarPorCPFActionPerformed
 

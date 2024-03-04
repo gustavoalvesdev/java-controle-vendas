@@ -463,7 +463,9 @@ public class FrmClientes extends javax.swing.JFrame {
         jTpClientes.addTab("Consulta de Clientes", jPnConsulta);
 
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/new-32.png"))); // NOI18N
         jBtnNovo.setText("NOVO");
+        jBtnNovo.setEnabled(false);
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnNovoActionPerformed(evt);
@@ -471,6 +473,7 @@ public class FrmClientes extends javax.swing.JFrame {
         });
 
         jBtnSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/save-32.png"))); // NOI18N
         jBtnSalvar.setText("SALVAR");
         jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -479,7 +482,9 @@ public class FrmClientes extends javax.swing.JFrame {
         });
 
         jBtnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/edit-32.png"))); // NOI18N
         jBtnEditar.setText("EDITAR");
+        jBtnEditar.setEnabled(false);
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnEditarActionPerformed(evt);
@@ -487,6 +492,7 @@ public class FrmClientes extends javax.swing.JFrame {
         });
 
         jBtnExcluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/delete-32.png"))); // NOI18N
         jBtnExcluir.setText("EXCLUIR");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -502,8 +508,8 @@ public class FrmClientes extends javax.swing.JFrame {
             .addComponent(jTpClientes)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(211, 211, 211)
-                .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBtnSalvar)
                 .addGap(18, 18, 18)
                 .addComponent(jBtnEditar)
@@ -545,7 +551,7 @@ public class FrmClientes extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
+            .addGap(0, 506, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -556,9 +562,7 @@ public class FrmClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    
+
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
         try {
 
@@ -581,7 +585,25 @@ public class FrmClientes extends javax.swing.JFrame {
             dao.cadastrarCliente(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
+            
+            jBtnSalvar.setEnabled(false);
+            jBtnEditar.setEnabled(false);
+            jBtnExcluir.setEnabled(false);
+            jBtnNovo.setEnabled(true);
 
+            jtfNome.setEnabled(false);
+            jFtfRg.setEnabled(false);
+            jtfEmail.setEnabled(false);
+            jFtfCelular.setEnabled(false);
+            jFtfTelefone.setEnabled(false);
+            jFtfCep.setEnabled(false);
+            jTfEndereco.setEnabled(false);
+            jTfNumero.setEnabled(false);
+            jTfBairro.setEnabled(false);
+            jTfCidade.setEnabled(false);
+            jTfComplemento.setEnabled(false);
+            jcbUf.setEnabled(false);
+            
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
         }
@@ -610,6 +632,27 @@ public class FrmClientes extends javax.swing.JFrame {
             jTfCidade.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 11).toString());
             jTfComplemento.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 12).toString());
             jcbUf.setSelectedItem(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 13).toString());
+            
+            jtfNome.setEnabled(true);
+            jFtfRg.setEnabled(true);
+            jFtfCpf.setEnabled(true);
+            jtfEmail.setEnabled(true);
+            jFtfCelular.setEnabled(true);
+            jFtfTelefone.setEnabled(true);
+            jFtfCep.setEnabled(true);
+            jTfEndereco.setEnabled(true);
+            jTfNumero.setEnabled(true);
+            jTfBairro.setEnabled(true);
+            jTfCidade.setEnabled(true);
+            jTfComplemento.setEnabled(true);
+            jcbUf.setEnabled(true);
+            jBtnBuscarPorCPF.setEnabled(true);
+
+            jBtnNovo.setEnabled(true);
+            jBtnEditar.setEnabled(true);
+            jBtnExcluir.setEnabled(true);
+            jBtnSalvar.setEnabled(false);
+            
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada!");
         }
@@ -639,6 +682,26 @@ public class FrmClientes extends javax.swing.JFrame {
             dao.alterarCliente(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
+            
+            jtfNome.setEnabled(false);
+            jFtfRg.setEnabled(false);
+            jFtfCpf.setEnabled(false);
+            jtfEmail.setEnabled(false);
+            jFtfCelular.setEnabled(false);
+            jFtfTelefone.setEnabled(false);
+            jFtfCep.setEnabled(false);
+            jTfEndereco.setEnabled(false);
+            jTfNumero.setEnabled(false);
+            jTfBairro.setEnabled(false);
+            jTfCidade.setEnabled(false);
+            jTfComplemento.setEnabled(false);
+            jcbUf.setEnabled(false);
+            jBtnBuscarPorCPF.setEnabled(false);
+
+            jBtnSalvar.setEnabled(false);
+            jBtnEditar.setEnabled(false);
+            jBtnExcluir.setEnabled(false);
+            jBtnNovo.setEnabled(true);
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para alteração: " + erro.getMessage());
@@ -654,6 +717,26 @@ public class FrmClientes extends javax.swing.JFrame {
             dao.excluirCliente(id);
 
             new Utilitarios().limpaTela(jPnCadastro);
+            
+            jtfNome.setEnabled(false);
+            jFtfRg.setEnabled(false);
+            jFtfCpf.setEnabled(false);
+            jtfEmail.setEnabled(false);
+            jFtfCelular.setEnabled(false);
+            jFtfTelefone.setEnabled(false);
+            jFtfCep.setEnabled(false);
+            jTfEndereco.setEnabled(false);
+            jTfNumero.setEnabled(false);
+            jTfBairro.setEnabled(false);
+            jTfCidade.setEnabled(false);
+            jTfComplemento.setEnabled(false);
+            jcbUf.setEnabled(false);
+            jBtnBuscarPorCPF.setEnabled(false);
+
+            jBtnSalvar.setEnabled(false);
+            jBtnEditar.setEnabled(false);
+            jBtnExcluir.setEnabled(false);
+            jBtnNovo.setEnabled(true);
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());
@@ -698,6 +781,27 @@ public class FrmClientes extends javax.swing.JFrame {
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
         new Utilitarios().limpaTela(jPnCadastro);
+
+        jtfNome.requestFocus();
+        jBtnNovo.setEnabled(false);
+        jBtnSalvar.setEnabled(true);
+        jBtnEditar.setEnabled(false);
+        jBtnExcluir.setEnabled(false);
+
+        jtfNome.setEnabled(true);
+        jFtfRg.setEnabled(true);
+        jFtfCpf.setEnabled(true);
+        jtfEmail.setEnabled(true);
+        jFtfCelular.setEnabled(true);
+        jFtfTelefone.setEnabled(true);
+        jFtfCep.setEnabled(true);
+        jTfEndereco.setEnabled(true);
+        jTfNumero.setEnabled(true);
+        jTfBairro.setEnabled(true);
+        jTfCidade.setEnabled(true);
+        jTfComplemento.setEnabled(true);
+        jcbUf.setEnabled(true);
+        jBtnBuscarPorCPF.setEnabled(true);
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jFtfCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFtfCepActionPerformed
@@ -730,9 +834,29 @@ public class FrmClientes extends javax.swing.JFrame {
             jTfBairro.setText(obj.getBairro());
             jTfCidade.setText(obj.getCidade());
             jcbUf.setSelectedItem(obj.getUf());
+            
+            jtfNome.setEnabled(true);
+            jFtfRg.setEnabled(true);
+            jFtfCpf.setEnabled(true);
+            jtfEmail.setEnabled(true);
+            jFtfCelular.setEnabled(true);
+            jFtfTelefone.setEnabled(true);
+            jFtfCep.setEnabled(true);
+            jTfEndereco.setEnabled(true);
+            jTfNumero.setEnabled(true);
+            jTfBairro.setEnabled(true);
+            jTfCidade.setEnabled(true);
+            jTfComplemento.setEnabled(true);
+            jcbUf.setEnabled(true);
+            jBtnBuscarPorCPF.setEnabled(true);
+            
+            jBtnEditar.setEnabled(true);
+            jBtnExcluir.setEnabled(true);
+            jBtnSalvar.setEnabled(false);
+            jBtnNovo.setEnabled(true);
         }
 
-
+        jtfNome.requestFocus();
     }//GEN-LAST:event_jBtnBuscarPorCPFActionPerformed
 
     private void jFtfCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFtfCepKeyPressed

@@ -1,4 +1,4 @@
-CREATE DATABASE BDVENDAS;
+CREATE DATABASE IF NOT EXISTS BDVENDAS;
 
 
 CREATE USER 'teste'@'%' IDENTIFIED BY '123';
@@ -11,7 +11,7 @@ flush privileges;
 
 USE BDVENDAS;
 
-CREATE TABLE tb_clientes (
+CREATE TABLE IF NOT EXISTS tb_clientes (
   id int auto_increment primary key,
   nome varchar(100),
   rg varchar (30),
@@ -28,7 +28,7 @@ CREATE TABLE tb_clientes (
   estado varchar (2)
 );
 
-CREATE TABLE tb_fornecedores (
+CREATE TABLE IF NOT EXISTS tb_fornecedores (
   id int auto_increment primary key,
   nome varchar(100),
   cnpj varchar (100),
@@ -44,7 +44,7 @@ CREATE TABLE tb_fornecedores (
   estado varchar (2)
 );
 
-CREATE TABLE tb_funcionarios (
+CREATE TABLE IF NOT EXISTS tb_funcionarios (
   id int auto_increment primary key,
   nome varchar(100),
   rg varchar (30),
@@ -64,7 +64,7 @@ CREATE TABLE tb_funcionarios (
   estado varchar (2)
 );
 
-CREATE TABLE tb_produtos (
+CREATE TABLE IF NOT EXISTS tb_produtos (
   id int auto_increment primary key,
   descricao varchar(100),
   preco decimal (10,2),
@@ -74,7 +74,7 @@ CREATE TABLE tb_produtos (
   FOREIGN KEY (for_id) REFERENCES tb_fornecedores(id)
 );
 
-CREATE TABLE tb_vendas (
+CREATE TABLE IF NOT EXISTS tb_vendas (
   id int auto_increment primary key,
   cliente_id int,
   data_venda datetime,
@@ -84,7 +84,7 @@ CREATE TABLE tb_vendas (
   FOREIGN KEY (cliente_id) REFERENCES tb_clientes(id)
 );
 
-CREATE TABLE tb_itensvendas (
+CREATE TABLE IF NOT EXISTS tb_itensvendas (
   id int auto_increment primary key,
   venda_id int,
   produto_id int,
