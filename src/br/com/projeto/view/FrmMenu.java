@@ -5,6 +5,10 @@
  */
 package br.com.projeto.view;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author gusta
@@ -27,6 +31,16 @@ public class FrmMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagens/fundo.jpg"));
+
+        Image image = icon.getImage();
+        jDpPrincipal = new javax.swing.JDesktopPane() {
+
+            public void paintComponent(Graphics g) {
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            }
+
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -52,6 +66,17 @@ public class FrmMenu extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+
+        javax.swing.GroupLayout jDpPrincipalLayout = new javax.swing.GroupLayout(jDpPrincipal);
+        jDpPrincipal.setLayout(jDpPrincipalLayout);
+        jDpPrincipalLayout.setHorizontalGroup(
+            jDpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 863, Short.MAX_VALUE)
+        );
+        jDpPrincipalLayout.setVerticalGroup(
+            jDpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 413, Short.MAX_VALUE)
+        );
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/clientes.png"))); // NOI18N
         jMenu1.setText("Clientes");
@@ -138,11 +163,11 @@ public class FrmMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 863, Short.MAX_VALUE)
+            .addComponent(jDpPrincipal)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 413, Short.MAX_VALUE)
+            .addComponent(jDpPrincipal)
         );
 
         pack();
@@ -189,6 +214,7 @@ public class FrmMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane jDpPrincipal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
