@@ -261,6 +261,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         }
         jFtfCpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jBtnBuscarPorCPF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
         jBtnBuscarPorCPF.setText("Buscar por CPF");
         jBtnBuscarPorCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,7 +308,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addGap(10, 10, 10)
                         .addComponent(jFtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtnBuscarPorCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPnCadastroLayout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -393,10 +394,10 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                         .addComponent(jLabel15))
                     .addGroup(jPnCadastroLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBtnBuscarPorCPF)
-                            .addComponent(jFtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                        .addGroup(jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jFtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnBuscarPorCPF))))
+                .addGap(16, 16, 16)
                 .addGroup(jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFtfCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -465,6 +466,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         jBtnPesquisar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
         jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -500,8 +502,8 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtfConsultaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 387, Short.MAX_VALUE)))
+                        .addComponent(jBtnPesquisar)
+                        .addGap(0, 375, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPnConsultaLayout.setVerticalGroup(
@@ -520,7 +522,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jTpFuncionarios.addTab("Consulta de Funcionários", jPnConsulta);
 
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/new-32.png"))); // NOI18N
+        jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/new-32.png"))); // NOI18N
         jBtnNovo.setText("NOVO");
         jBtnNovo.setEnabled(false);
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -530,7 +532,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         jBtnSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/save-32.png"))); // NOI18N
+        jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/save-32.png"))); // NOI18N
         jBtnSalvar.setText("SALVAR");
         jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -539,7 +541,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         jBtnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/edit-32.png"))); // NOI18N
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/edit-32.png"))); // NOI18N
         jBtnEditar.setText("EDITAR");
         jBtnEditar.setToolTipText("");
         jBtnEditar.setEnabled(false);
@@ -550,7 +552,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         });
 
         jBtnExcluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/delete-32.png"))); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete-32.png"))); // NOI18N
         jBtnExcluir.setText("EXCLUIR");
         jBtnExcluir.setEnabled(false);
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -565,8 +567,8 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jTpFuncionarios)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(173, 173, 173)
                 .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBtnSalvar)
@@ -574,7 +576,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addComponent(jBtnEditar)
                 .addGap(18, 18, 18)
                 .addComponent(jBtnExcluir)
-                .addGap(108, 108, 108))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jBtnEditar, jBtnExcluir, jBtnNovo, jBtnSalvar});
@@ -585,13 +587,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTpFuncionarios)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnNovo)
                     .addComponent(jBtnSalvar)
                     .addComponent(jBtnEditar)
-                    .addComponent(jBtnExcluir))
-                .addContainerGap())
+                    .addComponent(jBtnExcluir)))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jBtnEditar, jBtnExcluir, jBtnNovo, jBtnSalvar});
@@ -612,9 +613,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             .addGap(0, 546, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 20, Short.MAX_VALUE)
+                    .addGap(0, 16, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 20, Short.MAX_VALUE)))
+                    .addGap(0, 16, Short.MAX_VALUE)))
         );
 
         pack();

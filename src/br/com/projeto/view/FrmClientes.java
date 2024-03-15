@@ -252,6 +252,7 @@ public class FrmClientes extends javax.swing.JFrame {
         }
         jFtfCpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
+        jBtnBuscarPorCPF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
         jBtnBuscarPorCPF.setText("Buscar por CPF");
         jBtnBuscarPorCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -265,7 +266,7 @@ public class FrmClientes extends javax.swing.JFrame {
             jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnCadastroLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPnCadastroLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(10, 10, 10)
@@ -282,8 +283,8 @@ public class FrmClientes extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addGap(10, 10, 10)
                         .addComponent(jFtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(jBtnBuscarPorCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnBuscarPorCPF))
                     .addGroup(jPnCadastroLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(10, 10, 10)
@@ -324,7 +325,7 @@ public class FrmClientes extends javax.swing.JFrame {
                         .addComponent(jLabel13)
                         .addGap(4, 4, 4)
                         .addComponent(jcbUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2))
+                .addGap(7, 7, 7))
         );
         jPnCadastroLayout.setVerticalGroup(
             jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,10 +353,10 @@ public class FrmClientes extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(jLabel15))
                     .addGroup(jPnCadastroLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBtnBuscarPorCPF)
-                            .addComponent(jFtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jFtfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBtnBuscarPorCPF))))
                 .addGap(18, 18, 18)
                 .addGroup(jPnCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,6 +409,7 @@ public class FrmClientes extends javax.swing.JFrame {
         });
 
         jBtnPesquisar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
         jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,13 +459,13 @@ public class FrmClientes extends javax.swing.JFrame {
                     .addComponent(jBtnPesquisar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         jTpClientes.addTab("Consulta de Clientes", jPnConsulta);
 
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/new-32.png"))); // NOI18N
+        jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/new-32.png"))); // NOI18N
         jBtnNovo.setText("NOVO");
         jBtnNovo.setEnabled(false);
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -473,7 +475,7 @@ public class FrmClientes extends javax.swing.JFrame {
         });
 
         jBtnSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/save-32.png"))); // NOI18N
+        jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/save-32.png"))); // NOI18N
         jBtnSalvar.setText("SALVAR");
         jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -482,7 +484,7 @@ public class FrmClientes extends javax.swing.JFrame {
         });
 
         jBtnEditar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/edit-32.png"))); // NOI18N
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/edit-32.png"))); // NOI18N
         jBtnEditar.setText("EDITAR");
         jBtnEditar.setEnabled(false);
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -492,7 +494,7 @@ public class FrmClientes extends javax.swing.JFrame {
         });
 
         jBtnExcluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/delete-32.png"))); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete-32.png"))); // NOI18N
         jBtnExcluir.setText("EXCLUIR");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

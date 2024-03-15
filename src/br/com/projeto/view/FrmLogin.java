@@ -102,11 +102,11 @@ public class FrmLogin extends javax.swing.JFrame {
         jPfSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jBtnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/cancel-32.png"))); // NOI18N
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancel-32.png"))); // NOI18N
         jBtnCancelar.setText("CANCELAR");
 
         jBtnEntrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/enter-32.png"))); // NOI18N
+        jBtnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/enter-32.png"))); // NOI18N
         jBtnEntrar.setText("ENTRAR");
         jBtnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class FrmLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/projeto/icons/login-128.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/login-128.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
