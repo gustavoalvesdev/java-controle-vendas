@@ -104,6 +104,11 @@ public class FrmLogin extends javax.swing.JFrame {
         jBtnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancel-32.png"))); // NOI18N
         jBtnCancelar.setText("CANCELAR");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
 
         jBtnEntrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/enter-32.png"))); // NOI18N
@@ -184,6 +189,10 @@ public class FrmLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro na Tela de Login: " + e.getMessage());
         }
     }//GEN-LAST:event_jBtnEntrarActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+            System.exit(0);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

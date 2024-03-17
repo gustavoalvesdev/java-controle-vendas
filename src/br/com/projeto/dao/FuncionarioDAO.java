@@ -9,6 +9,7 @@ import br.com.projeto.jdbc.ConnectionFactory;
 import java.sql.Connection;
 import br.com.projeto.model.Funcionario;
 import br.com.projeto.model.WebServiceCep;
+import br.com.projeto.view.FrmLogin;
 import br.com.projeto.view.FrmMenu;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -303,6 +304,7 @@ public class FuncionarioDAO {
                 
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário e/ou senha incorreto(s)!");
+                new FrmLogin().setVisible(true);
             }
             
         } catch(SQLException e) {
