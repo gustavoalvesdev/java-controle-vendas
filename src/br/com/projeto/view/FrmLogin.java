@@ -7,6 +7,10 @@ package br.com.projeto.view;
 
 import br.com.projeto.dao.FuncionarioDAO;
 import javax.swing.JOptionPane;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 
 /**
  *
@@ -19,6 +23,18 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
+        
+        ((AbstractDocument) jTfEmail.getDocument()).setDocumentFilter(new DocumentFilter() {
+            @Override
+            public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                super.insertString(fb, offset, string.toUpperCase(), attr);
+            };
+            
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                super.replace(fb, offset, length, text.toUpperCase(), attrs);
+            }
+        });
     }
 
     /**
@@ -91,7 +107,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGap(30, 30, 30))
         );
 
-        jTfEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTfEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("E-mail:");
@@ -99,7 +115,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Senha:");
 
-        jPfSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPfSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jBtnCancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancel-32.png"))); // NOI18N

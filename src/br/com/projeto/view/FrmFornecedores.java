@@ -6,7 +6,9 @@
 package br.com.projeto.view;
 
 import br.com.projeto.dao.ClienteDAO;
+import br.com.projeto.dao.FornecedorDAO;
 import br.com.projeto.model.Cliente;
+import br.com.projeto.model.Fornecedor;
 import br.com.projeto.model.Utilitarios;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -550,10 +552,9 @@ public class FrmFornecedores extends javax.swing.JFrame {
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
         try {
 
-            Cliente obj = new Cliente();
+            Fornecedor obj = new Fornecedor();
             obj.setNome(jtfNome.getText());
-            obj.setRg(jFtfCnpj.getText());
-            obj.setCpf(jFtfCpf.getText());
+            obj.setCnpj(jFtfCnpj.getText());
             obj.setEmail(jtfEmail.getText());
             obj.setTelefone(jFtfTelefone.getText());
             obj.setCelular(jFtfCelular.getText());
@@ -565,8 +566,8 @@ public class FrmFornecedores extends javax.swing.JFrame {
             obj.setCidade(jTfCidade.getText());
             obj.setUf(jcbUf.getSelectedItem().toString());
 
-            ClienteDAO dao = new ClienteDAO();
-            dao.cadastrarCliente(obj);
+            FornecedorDAO dao = new FornecedorDAO();
+            dao.cadastrarFornecedor(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
             
@@ -605,7 +606,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
             jtfCodigo.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 0).toString());
             jtfNome.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 1).toString());
             jFtfCnpj.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 2).toString());
-            jFtfCpf.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 3).toString());
+           
             jtfEmail.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 4).toString());
             jFtfCelular.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 5).toString());
             jFtfTelefone.setText(jTblConsultaCliente.getValueAt(jTblConsultaCliente.getSelectedRow(), 6).toString());
@@ -619,7 +620,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
             
             jtfNome.setEnabled(true);
             jFtfCnpj.setEnabled(true);
-            jFtfCpf.setEnabled(true);
+         
             jtfEmail.setEnabled(true);
             jFtfCelular.setEnabled(true);
             jFtfTelefone.setEnabled(true);
@@ -649,7 +650,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
             Cliente obj = new Cliente();
             obj.setNome(jtfNome.getText());
             obj.setRg(jFtfCnpj.getText());
-            obj.setCpf(jFtfCpf.getText());
+           
             obj.setEmail(jtfEmail.getText());
             obj.setTelefone(jFtfTelefone.getText());
             obj.setCelular(jFtfCelular.getText());
@@ -669,7 +670,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
             
             jtfNome.setEnabled(false);
             jFtfCnpj.setEnabled(false);
-            jFtfCpf.setEnabled(false);
+           
             jtfEmail.setEnabled(false);
             jFtfCelular.setEnabled(false);
             jFtfTelefone.setEnabled(false);
@@ -704,7 +705,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
             
             jtfNome.setEnabled(false);
             jFtfCnpj.setEnabled(false);
-            jFtfCpf.setEnabled(false);
+           
             jtfEmail.setEnabled(false);
             jFtfCelular.setEnabled(false);
             jFtfTelefone.setEnabled(false);
@@ -774,7 +775,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
 
         jtfNome.setEnabled(true);
         jFtfCnpj.setEnabled(true);
-        jFtfCpf.setEnabled(true);
+      
         jtfEmail.setEnabled(true);
         jFtfCelular.setEnabled(true);
         jFtfTelefone.setEnabled(true);
@@ -793,54 +794,54 @@ public class FrmFornecedores extends javax.swing.JFrame {
     }//GEN-LAST:event_jFtfCepActionPerformed
 
     private void jBtnBuscarPorCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarPorCnpjActionPerformed
-        // Botão buscar por CPF
+        // Botão buscar por CNPJ
 
-        String cpf = jFtfCpf.getText();
+        String cpf = jFtfCnpj.getText();
 
-        Cliente obj = new Cliente();
+        Fornecedor obj = new Fornecedor();
 
-        ClienteDAO dao = new ClienteDAO();
+        FornecedorDAO dao = new FornecedorDAO();
 
-        obj = dao.consultaPorCpf(cpf);
-
-        if (obj != null) {
-            // Exibir os dados nos campos de texto
-            jtfCodigo.setText(String.valueOf(obj.getId()));
-            jtfNome.setText(obj.getNome());
-            jFtfCnpj.setText(obj.getRg());
-            jtfEmail.setText(obj.getEmail());
-            jFtfTelefone.setText(obj.getTelefone());
-            jFtfCelular.setText(obj.getCelular());
-            jFtfCep.setText(obj.getCep());
-            jTfEndereco.setText(obj.getEndereco());
-            jTfNumero.setText(String.valueOf(obj.getNumero()));
-            jTfComplemento.setText(obj.getComplemento());
-            jTfBairro.setText(obj.getBairro());
-            jTfCidade.setText(obj.getCidade());
-            jcbUf.setSelectedItem(obj.getUf());
-            
-            jtfNome.setEnabled(true);
-            jFtfCnpj.setEnabled(true);
-            jFtfCpf.setEnabled(true);
-            jtfEmail.setEnabled(true);
-            jFtfCelular.setEnabled(true);
-            jFtfTelefone.setEnabled(true);
-            jFtfCep.setEnabled(true);
-            jTfEndereco.setEnabled(true);
-            jTfNumero.setEnabled(true);
-            jTfBairro.setEnabled(true);
-            jTfCidade.setEnabled(true);
-            jTfComplemento.setEnabled(true);
-            jcbUf.setEnabled(true);
-            jBtnBuscarPorCnpj.setEnabled(true);
-            
-            jBtnEditar.setEnabled(true);
-            jBtnExcluir.setEnabled(true);
-            jBtnSalvar.setEnabled(false);
-            jBtnNovo.setEnabled(true);
-        }
-
-        jtfNome.requestFocus();
+//        obj = dao.consultaPorCpf(cpf);
+//
+//        if (obj != null) {
+//            // Exibir os dados nos campos de texto
+//            jtfCodigo.setText(String.valueOf(obj.getId()));
+//            jtfNome.setText(obj.getNome());
+//            jFtfCnpj.setText(obj.getRg());
+//            jtfEmail.setText(obj.getEmail());
+//            jFtfTelefone.setText(obj.getTelefone());
+//            jFtfCelular.setText(obj.getCelular());
+//            jFtfCep.setText(obj.getCep());
+//            jTfEndereco.setText(obj.getEndereco());
+//            jTfNumero.setText(String.valueOf(obj.getNumero()));
+//            jTfComplemento.setText(obj.getComplemento());
+//            jTfBairro.setText(obj.getBairro());
+//            jTfCidade.setText(obj.getCidade());
+//            jcbUf.setSelectedItem(obj.getUf());
+//            
+//            jtfNome.setEnabled(true);
+//            jFtfCnpj.setEnabled(true);
+//            jFtfCpf.setEnabled(true);
+//            jtfEmail.setEnabled(true);
+//            jFtfCelular.setEnabled(true);
+//            jFtfTelefone.setEnabled(true);
+//            jFtfCep.setEnabled(true);
+//            jTfEndereco.setEnabled(true);
+//            jTfNumero.setEnabled(true);
+//            jTfBairro.setEnabled(true);
+//            jTfCidade.setEnabled(true);
+//            jTfComplemento.setEnabled(true);
+//            jcbUf.setEnabled(true);
+//            jBtnBuscarPorCnpj.setEnabled(true);
+//            
+//            jBtnEditar.setEnabled(true);
+//            jBtnExcluir.setEnabled(true);
+//            jBtnSalvar.setEnabled(false);
+//            jBtnNovo.setEnabled(true);
+//        }
+//
+//        jtfNome.requestFocus();
     }//GEN-LAST:event_jBtnBuscarPorCnpjActionPerformed
 
     private void jFtfCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFtfCepKeyPressed
