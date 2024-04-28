@@ -111,7 +111,6 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jPnConsulta = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jtfConsultaNome = new javax.swing.JTextField();
-        jBtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTblConsultaFuncionario = new javax.swing.JTable();
         jBtnNovo = new javax.swing.JButton();
@@ -219,6 +218,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jLabel9.setText("Número:");
 
         jTfNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTfNumero.setText("0");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Bairro:");
@@ -456,21 +456,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jPnConsulta.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Nome:");
+        jLabel16.setText("Pesquisar por Nome:");
 
         jtfConsultaNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfConsultaNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfConsultaNomeKeyPressed(evt);
-            }
-        });
-
-        jBtnPesquisar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
-        jBtnPesquisar.setText("Pesquisar");
-        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPesquisarActionPerformed(evt);
             }
         });
 
@@ -496,14 +487,12 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             .addGroup(jPnConsultaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE)
                     .addGroup(jPnConsultaLayout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtfConsultaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnPesquisar)
-                        .addGap(0, 375, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPnConsultaLayout.setVerticalGroup(
@@ -512,8 +501,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jtfConsultaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnPesquisar))
+                    .addComponent(jtfConsultaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(71, Short.MAX_VALUE))
@@ -613,9 +601,9 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             .addGap(0, 546, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 16, Short.MAX_VALUE)
+                    .addGap(0, 21, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 16, Short.MAX_VALUE)))
+                    .addGap(0, 21, Short.MAX_VALUE)))
         );
 
         pack();
@@ -626,22 +614,81 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         try {
 
             Funcionario obj = new Funcionario();
-            obj.setNome(jtfNome.getText());
-            obj.setRg(jFtfRg.getText());
-            obj.setCpf(jFtfCpf.getText());
-            obj.setEmail(jtfEmail.getText());
-            obj.setSenha(jPfSenha.getText());
-            obj.setCargo(jTfCargo.getText());
-            obj.setNivelAcesso(jcbNivelAcesso.getSelectedItem().toString());
-            obj.setTelefone(jFtfTelefone.getText());
-            obj.setCelular(jFtfCelular.getText());
-            obj.setCep(jFtfCep.getText());
-            obj.setEndereco(jTfEndereco.getText());
-            obj.setNumero(Integer.parseInt(jTfNumero.getText()));
-            obj.setComplemento(jTfComplemento.getText());
-            obj.setBairro(jTfBairro.getText());
-            obj.setCidade(jTfCidade.getText());
-            obj.setUf(jcbUf.getSelectedItem().toString());
+            
+            // NOME
+            if (!"".equals(jtfNome.getText())) {
+                obj.setNome(jtfNome.getText());
+            }
+            
+            // RG
+            if (!"".equals(jFtfRg.getText())) {
+                obj.setRg(jFtfRg.getText());
+            }
+            
+            // CPF
+            if (!"".equals(jFtfCpf.getText())) {
+                obj.setCpf(jFtfCpf.getText());
+            }
+
+            // E-MAIL
+            if (!"".equals(jtfEmail.getText())) {
+                obj.setEmail(jtfEmail.getText());
+            }
+            
+            // SENHA
+            if (!"".equals(jPfSenha.getText())) {
+                obj.setSenha(jPfSenha.getText());
+            }
+            // CARGO
+            if (!"".equals(jTfCargo.getText())) {
+                obj.setCargo(jTfCargo.getText());
+            }
+            // NÍVEL DE ACESSO
+            if (!"".equals(jcbNivelAcesso.getSelectedItem().toString())) {
+                obj.setNivelAcesso(jcbNivelAcesso.getSelectedItem().toString());
+            }
+            
+            // TELEFONE
+            if (!"".equals(jFtfTelefone.getText())) {
+                obj.setTelefone(jFtfTelefone.getText());
+            }
+            
+            // CELULAR
+            if (!"".equals(jFtfCelular.getText())) {
+                obj.setCelular(jFtfCelular.getText());
+            }
+            // CEP
+            if (!"".equals(jFtfCep.getText())) {
+                obj.setCep(jFtfCep.getText());
+            }
+            // ENDEREÇO
+            if (!"".equals(jTfEndereco.getText())) {
+                obj.setEndereco(jTfEndereco.getText());
+            }
+            
+            // NÚMERO
+            if (!"".equals(Integer.parseInt(jTfNumero.getText()))) {
+                obj.setNumero(Integer.parseInt(jTfNumero.getText()));
+            }
+            
+            // COMPLEMENTO
+            if (!"".equals(jTfComplemento.getText())) {
+                obj.setComplemento(jTfComplemento.getText());
+            }
+            
+            // BAIRRO
+            if (!"".equals(jTfBairro.getText())) {
+                obj.setBairro(jTfBairro.getText());
+            }
+            
+            // CIDADE
+            if (!"".equals(jTfCidade.getText())) {
+                obj.setCidade(jTfCidade.getText());
+            }
+            
+            if (!"".equals(jcbUf.getSelectedItem().toString())) {
+                obj.setUf(jcbUf.getSelectedItem().toString());
+            }
 
             FuncionarioDAO dao = new FuncionarioDAO();
             dao.cadastrarFuncionario(obj);
@@ -670,7 +717,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
             jcbNivelAcesso.setEnabled(false);
 
         } catch (NumberFormatException erro) {
-            JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
+            JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro!");
         }
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
@@ -683,23 +730,142 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         // Pega os dados
         try {
             jTpFuncionarios.setSelectedIndex(0);
-            jtfCodigo.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 0).toString());
-            jtfNome.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 1).toString());
-            jFtfRg.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 2).toString());
-            jFtfCpf.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 3).toString());
-            jtfEmail.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 4).toString());
-            jPfSenha.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 5).toString());
-            jTfCargo.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 6).toString());
-            jcbNivelAcesso.setSelectedItem(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 7).toString());
-            jFtfCelular.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 8).toString());
-            jFtfTelefone.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 9).toString());
-            jFtfCep.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 10).toString());
-            jTfEndereco.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 11).toString());
-            jTfNumero.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 12).toString());
-            jTfBairro.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 13).toString());
-            jTfCidade.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 14).toString());
-            jTfComplemento.setText(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 15).toString());
-            jcbUf.setSelectedItem(jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 16).toString());
+            
+            // CÓDIGO
+            Object codigo = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 0);
+            if (codigo != null) {
+                jtfCodigo.setText(codigo.toString());
+            } else {
+                jtfCodigo.setText("");
+            }
+            
+            // NOME
+            Object nome = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 1);
+            if (nome != null) {
+                jtfNome.setText(nome.toString());
+            } else {
+                jtfNome.setText("");
+            }
+            
+            // RG
+            Object rg = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 2);
+            if (rg != null) {
+                jFtfRg.setText(rg.toString());
+            } else {
+                jFtfRg.setText("");
+            }
+            
+            // CPF
+            Object cpf = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 3);
+            if (cpf != null) {
+                jFtfCpf.setText(cpf.toString());
+            } else {
+                jFtfCpf.setText("");
+            }
+            
+            // EMAIL
+            Object email = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 4);
+            if (email != null) {
+                jtfEmail.setText(email.toString());
+            } else {
+                jtfEmail.setText("");
+            }
+            
+            // SENHA
+            Object senha = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 5);
+            if (senha != null) {
+                jPfSenha.setText(senha.toString());
+            } else {
+                jPfSenha.setText("");
+            }
+            
+            // CARGO
+            Object cargo = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 6);
+            if (cargo != null) {
+                jTfCargo.setText(cargo.toString());
+            } else {
+                jTfCargo.setText("");
+            }
+            
+            // NÍVEL DE ACESSO
+            Object nivelAcesso = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 7);
+            if (nivelAcesso != null) {
+                jcbNivelAcesso.setSelectedItem(nivelAcesso.toString());
+            } else {
+                jcbNivelAcesso.setSelectedItem("Usuário");
+            }
+            
+            // CELULAR
+            Object celular = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 8);
+            if (celular != null) {
+                jFtfCelular.setText(celular.toString());
+            } else {
+                jFtfCelular.setText("");
+            }
+            
+            // TELEFONE
+            Object telefone = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 9);
+            if (telefone != null) {
+                jFtfTelefone.setText(telefone.toString());
+            } else {
+                jFtfTelefone.setText("");
+            }
+            
+            // CEP
+            Object cep = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 10);
+            if (cep != null) {
+                jFtfCep.setText(cep.toString());
+            } else {
+                jFtfCep.setText("");
+            }
+            
+            // ENDEREÇO
+            Object endereco = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 11);
+            if (endereco != null) {
+                jTfEndereco.setText(endereco.toString());
+            } else {
+                jTfEndereco.setText("");
+            }
+            
+            // NÚMERO
+            Object numero = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 12);
+            if (numero != null) {
+                jTfNumero.setText(numero.toString());
+            } else {
+                jTfNumero.setText("0");
+            }
+            
+            // BAIRRO
+            Object bairro = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 13);
+            if (bairro != null) {
+                jTfBairro.setText(bairro.toString());
+            } else {
+                jTfBairro.setText("");
+            }
+            
+            // CIDADE
+            Object cidade = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 14);
+            if (cidade != null) {
+                jTfCidade.setText(cidade.toString());
+            } else {
+                jTfCidade.setText("");
+            }
+            
+            // COMPLEMENTO
+            Object complemento = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 15);
+            if (complemento != null) {
+                jTfComplemento.setText(complemento.toString());
+            } else {
+                jTfComplemento.setText("");
+            }
+            
+            // UF
+            Object uf = jTblConsultaFuncionario.getValueAt(jTblConsultaFuncionario.getSelectedRow(), 16);
+            if (uf != null) {
+                jcbUf.setSelectedItem(uf.toString());
+            } else {
+                jcbUf.setSelectedItem("AC");
+            }
 
             jtfNome.setEnabled(true);
             jFtfRg.setEnabled(true);
@@ -822,10 +988,6 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
-    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-
-    }//GEN-LAST:event_jBtnPesquisarActionPerformed
-
     private void jtfConsultaNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfConsultaNomeKeyPressed
         // Botão pesquisar
 
@@ -868,7 +1030,7 @@ public class FrmFuncionarios extends javax.swing.JFrame {
         jBtnSalvar.setEnabled(true);
         jBtnEditar.setEnabled(false);
         jBtnExcluir.setEnabled(false);
-
+        jTfNumero.setText("0");
         jtfNome.setEnabled(true);
         jFtfRg.setEnabled(true);
         jFtfCpf.setEnabled(true);
@@ -1018,7 +1180,6 @@ public class FrmFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnNovo;
-    private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JButton jBtnSalvar;
     private javax.swing.JFormattedTextField jFtfCelular;
     private javax.swing.JFormattedTextField jFtfCep;

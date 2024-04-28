@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -54,6 +55,19 @@ public class FrmClientes extends javax.swing.JFrame {
     public FrmClientes() {
         initComponents();
         jFtfCep.setFocusTraversalKeysEnabled(false);
+        
+//        try {
+//            Utilitarios.converteEmMaiusculo(jtfNome);
+//            Utilitarios.converteEmMaiusculo(jtfEmail);
+//            Utilitarios.converteEmMaiusculo(jTfEndereco);
+//            Utilitarios.converteEmMaiusculo(jTfNumero);
+//            Utilitarios.converteEmMaiusculo(jTfBairro);
+//            Utilitarios.converteEmMaiusculo(jTfCidade);
+//            Utilitarios.converteEmMaiusculo(jTfComplemento);
+//        } catch(NullPointerException e) {
+//            JOptionPane.showMessageDialog(null, "Falha ao Gerar Dados!");
+//        }
+        
     }
 
     /**
@@ -102,7 +116,6 @@ public class FrmClientes extends javax.swing.JFrame {
         jPnConsulta = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jtfConsultaNome = new javax.swing.JTextField();
-        jBtnPesquisar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTblConsultaCliente = new javax.swing.JTable();
         jBtnNovo = new javax.swing.JButton();
@@ -399,21 +412,12 @@ public class FrmClientes extends javax.swing.JFrame {
         jPnConsulta.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel16.setText("Nome:");
+        jLabel16.setText("Pesquisar por Nome:");
 
         jtfConsultaNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtfConsultaNome.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfConsultaNomeKeyPressed(evt);
-            }
-        });
-
-        jBtnPesquisar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
-        jBtnPesquisar.setText("Pesquisar");
-        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPesquisarActionPerformed(evt);
             }
         });
 
@@ -439,14 +443,12 @@ public class FrmClientes extends javax.swing.JFrame {
             .addGroup(jPnConsultaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
                     .addGroup(jPnConsultaLayout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtfConsultaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 355, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPnConsultaLayout.setVerticalGroup(
@@ -455,11 +457,10 @@ public class FrmClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPnConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jtfConsultaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBtnPesquisar))
+                    .addComponent(jtfConsultaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jTpClientes.addTab("Consulta de Clientes", jPnConsulta);
@@ -569,19 +570,71 @@ public class FrmClientes extends javax.swing.JFrame {
         try {
 
             Cliente obj = new Cliente();
-            obj.setNome(jtfNome.getText());
-            obj.setRg(jFtfRg.getText());
-            obj.setCpf(jFtfCpf.getText());
-            obj.setEmail(jtfEmail.getText());
-            obj.setTelefone(jFtfTelefone.getText());
-            obj.setCelular(jFtfCelular.getText());
-            obj.setCep(jFtfCep.getText());
-            obj.setEndereco(jTfEndereco.getText());
-            obj.setNumero(Integer.parseInt(jTfNumero.getText()));
-            obj.setComplemento(jTfComplemento.getText());
-            obj.setBairro(jTfBairro.getText());
-            obj.setCidade(jTfCidade.getText());
-            obj.setUf(jcbUf.getSelectedItem().toString());
+            
+            // NOME
+            if (!"".equals(jtfNome.getText())) {
+                obj.setNome(jtfNome.getText());
+            }
+            
+            // RG
+            if (!"".equals(jFtfRg.getText())) {
+                obj.setRg(jFtfRg.getText());
+            }
+            
+            // CPF
+            if (!"".equals(jFtfCpf.getText())) {
+                obj.setCpf(jFtfCpf.getText());
+            }
+            
+            // E-MAIL
+            if (!"".equals(jtfEmail.getText())) {
+                obj.setEmail(jtfEmail.getText());
+            }
+            
+            // TELEFONE
+            if (!"".equals(jFtfTelefone.getText())) {
+                obj.setTelefone(jFtfTelefone.getText());
+            }
+            
+            // CELULAR
+            if (!"".equals(jFtfCelular.getText())) {
+                obj.setCelular(jFtfCelular.getText());
+            }
+            
+            // CEP
+            if (!"".equals(jFtfCep.getText())) {
+                obj.setCep(jFtfCep.getText());
+            }
+            
+            // ENDEREÇO
+            if (!"".equals(jTfEndereco.getText())) {
+                obj.setEndereco(jTfEndereco.getText());
+            }
+            
+            // NÚMERO
+            if (!"".equals(jTfNumero.getText())) {
+                obj.setNumero(Integer.parseInt(jTfNumero.getText()));
+            }
+            
+            // COMPLEMENTO
+            if (!"".equals(jTfComplemento.getText())) {
+                obj.setComplemento(jTfComplemento.getText());
+            }
+            
+            // BAIRRO
+            if (!"".equals(jTfBairro.getText())) {
+                obj.setBairro(jTfBairro.getText());
+            }
+            
+            // CIDADE
+            if (!"".equals(jTfCidade.getText())) {
+                obj.setCidade(jTfCidade.getText());
+            }
+            
+            // UF
+            if (!"".equals(jcbUf.getSelectedItem().toString())) {
+                obj.setUf(jcbUf.getSelectedItem().toString());
+            }
 
             ClienteDAO dao = new ClienteDAO();
             dao.cadastrarCliente(obj);
@@ -607,8 +660,8 @@ public class FrmClientes extends javax.swing.JFrame {
             jcbUf.setEnabled(false);
             
         } catch (NumberFormatException erro) {
-            JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: " + erro.getMessage());
-        }
+            JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: Preencha corretamente os campos");
+        } 
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -744,10 +797,6 @@ public class FrmClientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
-
-    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-
-    }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jtfConsultaNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfConsultaNomeKeyPressed
         // Botão pesquisar
@@ -929,7 +978,6 @@ public class FrmClientes extends javax.swing.JFrame {
     private javax.swing.JButton jBtnEditar;
     private javax.swing.JButton jBtnExcluir;
     private javax.swing.JButton jBtnNovo;
-    private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JButton jBtnSalvar;
     private javax.swing.JFormattedTextField jFtfCelular;
     private javax.swing.JFormattedTextField jFtfCep;
