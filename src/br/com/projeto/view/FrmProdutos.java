@@ -6,13 +6,14 @@
 package br.com.projeto.view;
 
 import br.com.projeto.dao.ClienteDAO;
+import br.com.projeto.dao.FornecedorDAO;
 import br.com.projeto.model.Cliente;
+import br.com.projeto.model.Fornecedor;
 import br.com.projeto.model.Utilitarios;
-import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.BadLocationException;
+
 
 /**
  *
@@ -54,7 +55,7 @@ public class FrmProdutos extends javax.swing.JFrame {
      */
     public FrmProdutos() {
         initComponents();
-        jFtfCep.setFocusTraversalKeysEnabled(false);
+
         
 //        try {
 //            Utilitarios.converteEmMaiusculo(jtfNome);
@@ -92,7 +93,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         jtfQtdEstoque = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jcbFornecedor = new javax.swing.JComboBox<>();
+        jcbFornecedor = new javax.swing.JComboBox();
         jBtnPesquisar = new javax.swing.JButton();
         jtfPreco = new javax.swing.JTextField();
         jPnConsulta = new javax.swing.JPanel();
@@ -160,7 +161,15 @@ public class FrmProdutos extends javax.swing.JFrame {
         jLabel13.setText("Fornecedor:");
 
         jcbFornecedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jcbFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jcbFornecedor.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jcbFornecedorAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
@@ -411,60 +420,12 @@ public class FrmProdutos extends javax.swing.JFrame {
                 obj.setNome(jtfDescricao.getText());
             }
             
-            // RG
-            if (!"".equals(jFtfRg.getText())) {
-                obj.setRg(jFtfRg.getText());
-            }
-            
-            // CPF
-            if (!"".equals(jFtfCpf.getText())) {
-                obj.setCpf(jFtfCpf.getText());
-            }
             
             // E-MAIL
             if (!"".equals(jtfQtdEstoque.getText())) {
                 obj.setEmail(jtfQtdEstoque.getText());
             }
             
-            // TELEFONE
-            if (!"".equals(jFtfTelefone.getText())) {
-                obj.setTelefone(jFtfTelefone.getText());
-            }
-            
-            // CELULAR
-            if (!"".equals(jFtfCelular.getText())) {
-                obj.setCelular(jFtfCelular.getText());
-            }
-            
-            // CEP
-            if (!"".equals(jFtfCep.getText())) {
-                obj.setCep(jFtfCep.getText());
-            }
-            
-            // ENDEREÇO
-            if (!"".equals(jTfEndereco.getText())) {
-                obj.setEndereco(jTfEndereco.getText());
-            }
-            
-            // NÚMERO
-            if (!"".equals(jTfNumero.getText())) {
-                obj.setNumero(Integer.parseInt(jTfNumero.getText()));
-            }
-            
-            // COMPLEMENTO
-            if (!"".equals(jTfComplemento.getText())) {
-                obj.setComplemento(jTfComplemento.getText());
-            }
-            
-            // BAIRRO
-            if (!"".equals(jTfBairro.getText())) {
-                obj.setBairro(jTfBairro.getText());
-            }
-            
-            // CIDADE
-            if (!"".equals(jTfCidade.getText())) {
-                obj.setCidade(jTfCidade.getText());
-            }
             
             // UF
             if (!"".equals(jcbFornecedor.getSelectedItem().toString())) {
@@ -482,16 +443,9 @@ public class FrmProdutos extends javax.swing.JFrame {
             jBtnNovo.setEnabled(true);
 
             jtfDescricao.setEnabled(false);
-            jFtfRg.setEnabled(false);
+
             jtfQtdEstoque.setEnabled(false);
-            jFtfCelular.setEnabled(false);
-            jFtfTelefone.setEnabled(false);
-            jFtfCep.setEnabled(false);
-            jTfEndereco.setEnabled(false);
-            jTfNumero.setEnabled(false);
-            jTfBairro.setEnabled(false);
-            jTfCidade.setEnabled(false);
-            jTfComplemento.setEnabled(false);
+
             jcbFornecedor.setEnabled(false);
             
         } catch (NumberFormatException erro) {
@@ -510,31 +464,15 @@ public class FrmProdutos extends javax.swing.JFrame {
             jTpClientes.setSelectedIndex(0);
             jtfCodigo.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 0).toString());
             jtfDescricao.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 1).toString());
-            jFtfRg.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 2).toString());
-            jFtfCpf.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 3).toString());
+         
             jtfQtdEstoque.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 4).toString());
-            jFtfCelular.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 5).toString());
-            jFtfTelefone.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 6).toString());
-            jFtfCep.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 7).toString());
-            jTfEndereco.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 8).toString());
-            jTfNumero.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 9).toString());
-            jTfBairro.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 10).toString());
-            jTfCidade.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 11).toString());
-            jTfComplemento.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 12).toString());
+    
             jcbFornecedor.setSelectedItem(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 13).toString());
             
             jtfDescricao.setEnabled(true);
-            jFtfRg.setEnabled(true);
-            jFtfCpf.setEnabled(true);
+
             jtfQtdEstoque.setEnabled(true);
-            jFtfCelular.setEnabled(true);
-            jFtfTelefone.setEnabled(true);
-            jFtfCep.setEnabled(true);
-            jTfEndereco.setEnabled(true);
-            jTfNumero.setEnabled(true);
-            jTfBairro.setEnabled(true);
-            jTfCidade.setEnabled(true);
-            jTfComplemento.setEnabled(true);
+
             jcbFornecedor.setEnabled(true);
             jBtnPesquisar.setEnabled(true);
 
@@ -554,17 +492,9 @@ public class FrmProdutos extends javax.swing.JFrame {
 
             Cliente obj = new Cliente();
             obj.setNome(jtfDescricao.getText());
-            obj.setRg(jFtfRg.getText());
-            obj.setCpf(jFtfCpf.getText());
+ 
             obj.setEmail(jtfQtdEstoque.getText());
-            obj.setTelefone(jFtfTelefone.getText());
-            obj.setCelular(jFtfCelular.getText());
-            obj.setCep(jFtfCep.getText());
-            obj.setEndereco(jTfEndereco.getText());
-            obj.setNumero(Integer.parseInt(jTfNumero.getText()));
-            obj.setComplemento(jTfComplemento.getText());
-            obj.setBairro(jTfBairro.getText());
-            obj.setCidade(jTfCidade.getText());
+  
             obj.setUf(jcbFornecedor.getSelectedItem().toString());
             obj.setId(Integer.valueOf(jtfCodigo.getText()));
 
@@ -574,17 +504,9 @@ public class FrmProdutos extends javax.swing.JFrame {
             new Utilitarios().limpaTela(jPnCadastro);
             
             jtfDescricao.setEnabled(false);
-            jFtfRg.setEnabled(false);
-            jFtfCpf.setEnabled(false);
+
             jtfQtdEstoque.setEnabled(false);
-            jFtfCelular.setEnabled(false);
-            jFtfTelefone.setEnabled(false);
-            jFtfCep.setEnabled(false);
-            jTfEndereco.setEnabled(false);
-            jTfNumero.setEnabled(false);
-            jTfBairro.setEnabled(false);
-            jTfCidade.setEnabled(false);
-            jTfComplemento.setEnabled(false);
+
             jcbFornecedor.setEnabled(false);
             jBtnPesquisar.setEnabled(false);
 
@@ -609,17 +531,9 @@ public class FrmProdutos extends javax.swing.JFrame {
             new Utilitarios().limpaTela(jPnCadastro);
             
             jtfDescricao.setEnabled(false);
-            jFtfRg.setEnabled(false);
-            jFtfCpf.setEnabled(false);
+ 
             jtfQtdEstoque.setEnabled(false);
-            jFtfCelular.setEnabled(false);
-            jFtfTelefone.setEnabled(false);
-            jFtfCep.setEnabled(false);
-            jTfEndereco.setEnabled(false);
-            jTfNumero.setEnabled(false);
-            jTfBairro.setEnabled(false);
-            jTfCidade.setEnabled(false);
-            jTfComplemento.setEnabled(false);
+
             jcbFornecedor.setEnabled(false);
             jBtnPesquisar.setEnabled(false);
 
@@ -675,17 +589,9 @@ public class FrmProdutos extends javax.swing.JFrame {
         jBtnExcluir.setEnabled(false);
 
         jtfDescricao.setEnabled(true);
-        jFtfRg.setEnabled(true);
-        jFtfCpf.setEnabled(true);
+;
         jtfQtdEstoque.setEnabled(true);
-        jFtfCelular.setEnabled(true);
-        jFtfTelefone.setEnabled(true);
-        jFtfCep.setEnabled(true);
-        jTfEndereco.setEnabled(true);
-        jTfNumero.setEnabled(true);
-        jTfBairro.setEnabled(true);
-        jTfCidade.setEnabled(true);
-        jTfComplemento.setEnabled(true);
+
         jcbFornecedor.setEnabled(true);
         jBtnPesquisar.setEnabled(true);
     }//GEN-LAST:event_jBtnNovoActionPerformed
@@ -693,42 +599,25 @@ public class FrmProdutos extends javax.swing.JFrame {
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // Botão buscar por CPF
 
-        String cpf = jFtfCpf.getText();
 
         Cliente obj = new Cliente();
 
         ClienteDAO dao = new ClienteDAO();
 
-        obj = dao.consultaPorCpf(cpf);
 
         if (obj != null) {
             // Exibir os dados nos campos de texto
             jtfCodigo.setText(String.valueOf(obj.getId()));
             jtfDescricao.setText(obj.getNome());
-            jFtfRg.setText(obj.getRg());
+
             jtfQtdEstoque.setText(obj.getEmail());
-            jFtfTelefone.setText(obj.getTelefone());
-            jFtfCelular.setText(obj.getCelular());
-            jFtfCep.setText(obj.getCep());
-            jTfEndereco.setText(obj.getEndereco());
-            jTfNumero.setText(String.valueOf(obj.getNumero()));
-            jTfComplemento.setText(obj.getComplemento());
-            jTfBairro.setText(obj.getBairro());
-            jTfCidade.setText(obj.getCidade());
+ 
             jcbFornecedor.setSelectedItem(obj.getUf());
             
             jtfDescricao.setEnabled(true);
-            jFtfRg.setEnabled(true);
-            jFtfCpf.setEnabled(true);
+  
             jtfQtdEstoque.setEnabled(true);
-            jFtfCelular.setEnabled(true);
-            jFtfTelefone.setEnabled(true);
-            jFtfCep.setEnabled(true);
-            jTfEndereco.setEnabled(true);
-            jTfNumero.setEnabled(true);
-            jTfBairro.setEnabled(true);
-            jTfCidade.setEnabled(true);
-            jTfComplemento.setEnabled(true);
+
             jcbFornecedor.setEnabled(true);
             jBtnPesquisar.setEnabled(true);
             
@@ -740,6 +629,18 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         jtfDescricao.requestFocus();
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
+
+    private void jcbFornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jcbFornecedorAncestorAdded
+        // Carregando ComboBox Fornecedores
+        FornecedorDAO dao = new FornecedorDAO();
+        List<Fornecedor> listaDeFornecedores = dao.listarFornecedor();
+        
+        jcbFornecedor.removeAll();
+        
+        for (Fornecedor f : listaDeFornecedores) {
+            jcbFornecedor.addItem(f);
+        }
+    }//GEN-LAST:event_jcbFornecedorAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -797,7 +698,7 @@ public class FrmProdutos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTblConsultaProduto;
     private javax.swing.JTabbedPane jTpClientes;
-    private javax.swing.JComboBox<String> jcbFornecedor;
+    private javax.swing.JComboBox jcbFornecedor;
     private javax.swing.JTextField jtfCodigo;
     private javax.swing.JTextField jtfConsultaNome;
     private javax.swing.JTextField jtfDescricao;
