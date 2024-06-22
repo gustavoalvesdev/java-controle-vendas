@@ -7,8 +7,10 @@ package br.com.projeto.view;
 
 import br.com.projeto.dao.ClienteDAO;
 import br.com.projeto.dao.FornecedorDAO;
+import br.com.projeto.dao.ProdutoDAO;
 import br.com.projeto.model.Cliente;
 import br.com.projeto.model.Fornecedor;
+import br.com.projeto.model.Produto;
 import br.com.projeto.model.Utilitarios;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -413,27 +415,32 @@ public class FrmProdutos extends javax.swing.JFrame {
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
         try {
 
-            Cliente obj = new Cliente();
+            Produto obj = new Produto();
             
-            // NOME
+            // DESCRIÇÃO
             if (!"".equals(jtfDescricao.getText())) {
-                obj.setNome(jtfDescricao.getText());
+                obj.setDescricao(jtfDescricao.getText());
+            }
+            
+            // PREÇO
+            if (!"".equals(jtfPreco.getText())) {
+                obj.setPreco(Double.valueOf(jtfPreco.getText()));
             }
             
             
-            // E-MAIL
+            // QTD ESTOQUE
             if (!"".equals(jtfQtdEstoque.getText())) {
-                obj.setEmail(jtfQtdEstoque.getText());
+                obj.setQtdEstoque(Integer.valueOf(jtfQtdEstoque.getText()));
             }
             
             
-            // UF
+            // FORNECEDOR
             if (!"".equals(jcbFornecedor.getSelectedItem().toString())) {
-                obj.setUf(jcbFornecedor.getSelectedItem().toString());
+                obj.setFornecedor((Fornecedor)jcbFornecedor.getSelectedItem());
             }
 
-            ClienteDAO dao = new ClienteDAO();
-            dao.cadastrarCliente(obj);
+            ProdutoDAO dao = new ProdutoDAO();
+            dao.cadastrar(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
             
