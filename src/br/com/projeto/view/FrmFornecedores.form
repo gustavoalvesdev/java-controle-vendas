@@ -56,7 +56,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-              <Component id="jTpClientes" alignment="0" max="32767" attributes="0"/>
+              <Component id="jTpFornecedores" alignment="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="211" max="-2" attributes="0"/>
                   <Component id="jBtnNovo" linkSize="1" min="-2" pref="113" max="-2" attributes="0"/>
@@ -75,7 +75,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jTpClientes" min="-2" pref="299" max="-2" attributes="0"/>
+                  <Component id="jTpFornecedores" min="-2" pref="299" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jBtnNovo" linkSize="2" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
@@ -132,7 +132,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JTabbedPane" name="jTpClientes">
+        <Container class="javax.swing.JTabbedPane" name="jTpFornecedores">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>

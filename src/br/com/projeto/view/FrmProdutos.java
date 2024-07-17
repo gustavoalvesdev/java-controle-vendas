@@ -16,7 +16,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author Gustavo
@@ -29,19 +28,19 @@ public class FrmProdutos extends javax.swing.JFrame {
         List<Produto> lista = dao.listarProdutos();
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaProduto.getModel();
         dados.setNumRows(0);
-        
+
         for (Produto c : lista) {
-            
-            dados.addRow(new Object[] {
+
+            dados.addRow(new Object[]{
                 c.getId(),
                 c.getDescricao(),
                 c.getPreco(),
                 c.getQtdEstoque(),
                 c.getFornecedor().getNome()
             });
-            
+
         }
-        
+
     }
 
     /**
@@ -50,7 +49,6 @@ public class FrmProdutos extends javax.swing.JFrame {
     public FrmProdutos() {
         initComponents();
 
-        
 //        try {
 //            Utilitarios.converteEmMaiusculo(jtfNome);
 //            Utilitarios.converteEmMaiusculo(jtfEmail);
@@ -62,7 +60,6 @@ public class FrmProdutos extends javax.swing.JFrame {
 //        } catch(NullPointerException e) {
 //            JOptionPane.showMessageDialog(null, "Falha ao Gerar Dados!");
 //        }
-        
     }
 
     /**
@@ -77,7 +74,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTpClientes = new javax.swing.JTabbedPane();
+        jTpProdutos = new javax.swing.JTabbedPane();
         jPnCadastro = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtfCodigo = new javax.swing.JTextField();
@@ -156,12 +153,17 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         jcbFornecedor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcbFornecedor.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jcbFornecedorAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jcbFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jcbFornecedorMouseClicked(evt);
             }
         });
 
@@ -245,7 +247,7 @@ public class FrmProdutos extends javax.swing.JFrame {
                 .addGap(6, 6, 6))
         );
 
-        jTpClientes.addTab("Dados do Produto", jPnCadastro);
+        jTpProdutos.addTab("Dados do Produto", jPnCadastro);
 
         jPnConsulta.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -301,7 +303,7 @@ public class FrmProdutos extends javax.swing.JFrame {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        jTpClientes.addTab("Consulta de Produtos", jPnConsulta);
+        jTpProdutos.addTab("Consulta de Produtos", jPnConsulta);
 
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/new-32.png"))); // NOI18N
@@ -346,7 +348,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTpClientes)
+            .addComponent(jTpProdutos)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(211, 211, 211)
                 .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -366,7 +368,7 @@ public class FrmProdutos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTpClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTpProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -408,34 +410,32 @@ public class FrmProdutos extends javax.swing.JFrame {
         try {
 
             Produto obj = new Produto();
-            
+
             // DESCRIÇÃO
             if (!"".equals(jtfDescricao.getText())) {
                 obj.setDescricao(jtfDescricao.getText());
             }
-            
+
             // PREÇO
             if (!"".equals(jtfPreco.getText())) {
                 obj.setPreco(Double.valueOf(jtfPreco.getText()));
             }
-            
-            
+
             // QTD ESTOQUE
             if (!"".equals(jtfQtdEstoque.getText())) {
                 obj.setQtdEstoque(Integer.valueOf(jtfQtdEstoque.getText()));
             }
-            
-            
+
             // FORNECEDOR
             if (!"".equals(jcbFornecedor.getSelectedItem().toString())) {
-                obj.setFornecedor((Fornecedor)jcbFornecedor.getSelectedItem());
+                obj.setFornecedor((Fornecedor) jcbFornecedor.getSelectedItem());
             }
 
             ProdutoDAO dao = new ProdutoDAO();
             dao.cadastrar(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
-            
+
             jBtnSalvar.setEnabled(false);
             jBtnEditar.setEnabled(false);
             jBtnExcluir.setEnabled(false);
@@ -446,10 +446,10 @@ public class FrmProdutos extends javax.swing.JFrame {
             jtfQtdEstoque.setEnabled(false);
 
             jcbFornecedor.setEnabled(false);
-            
+
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para cadastro: Preencha corretamente os campos");
-        } 
+        }
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -460,14 +460,20 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         // Pega os dados
         try {
-            jTpClientes.setSelectedIndex(0);
+            jTpProdutos.setSelectedIndex(0);
             jtfCodigo.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 0).toString());
             jtfDescricao.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 1).toString());
-         
-            jtfQtdEstoque.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 4).toString());
-    
-            jcbFornecedor.setSelectedItem(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 13).toString());
-            
+            jtfPreco.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 2).toString());
+            jtfQtdEstoque.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 3).toString());
+
+            //jcbFornecedor.setSelectedItem(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 13).toString());
+            Fornecedor f = new Fornecedor();
+            FornecedorDAO dao = new FornecedorDAO();
+            f = dao.buscarFornecedorPorNome(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 4).toString());
+
+            jcbFornecedor.removeAllItems();
+            jcbFornecedor.getModel().setSelectedItem(f);
+
             jtfDescricao.setEnabled(true);
 
             jtfQtdEstoque.setEnabled(true);
@@ -479,7 +485,7 @@ public class FrmProdutos extends javax.swing.JFrame {
             jBtnEditar.setEnabled(true);
             jBtnExcluir.setEnabled(true);
             jBtnSalvar.setEnabled(false);
-            
+
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada!");
         }
@@ -489,19 +495,22 @@ public class FrmProdutos extends javax.swing.JFrame {
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         try {
 
-            Cliente obj = new Cliente();
-            obj.setNome(jtfDescricao.getText());
- 
-            obj.setEmail(jtfQtdEstoque.getText());
-  
-            obj.setUf(jcbFornecedor.getSelectedItem().toString());
-            obj.setId(Integer.valueOf(jtfCodigo.getText()));
+            Produto obj = new Produto();
+            obj.setId(Integer.parseInt(jtfCodigo.getText()));
+            obj.setDescricao(jtfDescricao.getText());
+            obj.setPreco(Double.parseDouble(jtfPreco.getText()));
+            obj.setQtdEstoque(Integer.parseInt(jtfQtdEstoque.getText()));
 
-            ClienteDAO dao = new ClienteDAO();
-            dao.alterarCliente(obj);
+            Fornecedor f = new Fornecedor();
+            f = (Fornecedor) jcbFornecedor.getSelectedItem();
+
+            obj.setFornecedor(f);
+
+            ProdutoDAO dao = new ProdutoDAO();
+            dao.alterar(obj);
 
             new Utilitarios().limpaTela(jPnCadastro);
-            
+
             jtfDescricao.setEnabled(false);
 
             jtfQtdEstoque.setEnabled(false);
@@ -522,15 +531,15 @@ public class FrmProdutos extends javax.swing.JFrame {
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         try {
 
-            int id = Integer.valueOf(jtfCodigo.getText());
-
-            ClienteDAO dao = new ClienteDAO();
-            dao.excluirCliente(id);
+            Produto obj = new Produto();
+            obj.setId(Integer.parseInt(jtfCodigo.getText()));
+            ProdutoDAO dao = new ProdutoDAO();
+            dao.excluirProduto(obj.getId());
 
             new Utilitarios().limpaTela(jPnCadastro);
-            
+
             jtfDescricao.setEnabled(false);
- 
+
             jtfQtdEstoque.setEnabled(false);
 
             jcbFornecedor.setEnabled(false);
@@ -551,31 +560,31 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         String nome = jtfConsultaNome.getText();
 
-        ClienteDAO dao = new ClienteDAO();
-        List<Cliente> lista = dao.buscarClientPorNome(nome);
+        ProdutoDAO dao = new ProdutoDAO();
+        //List<Produto> lista = dao.pesquisarProdutoPorNome(nome);
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaProduto.getModel();
         dados.setNumRows(0);
 
-        for (Cliente c : lista) {
-
-            dados.addRow(new Object[]{
-                c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getCelular(),
-                c.getTelefone(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getComplemento(),
-                c.getUf()
-            });
-
-        }
+//        for (Cliente c : lista) {
+//
+//            dados.addRow(new Object[]{
+//                c.getId(),
+//                c.getNome(),
+//                c.getRg(),
+//                c.getCpf(),
+//                c.getEmail(),
+//                c.getCelular(),
+//                c.getTelefone(),
+//                c.getCep(),
+//                c.getEndereco(),
+//                c.getNumero(),
+//                c.getBairro(),
+//                c.getCidade(),
+//                c.getComplemento(),
+//                c.getUf()
+//            });
+//
+//        }
     }//GEN-LAST:event_jtfConsultaNomeKeyPressed
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
@@ -588,7 +597,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         jBtnExcluir.setEnabled(false);
 
         jtfDescricao.setEnabled(true);
-;
+        ;
         jtfQtdEstoque.setEnabled(true);
 
         jcbFornecedor.setEnabled(true);
@@ -598,11 +607,9 @@ public class FrmProdutos extends javax.swing.JFrame {
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // Botão buscar por CPF
 
-
         Cliente obj = new Cliente();
 
         ClienteDAO dao = new ClienteDAO();
-
 
         if (obj != null) {
             // Exibir os dados nos campos de texto
@@ -610,16 +617,16 @@ public class FrmProdutos extends javax.swing.JFrame {
             jtfDescricao.setText(obj.getNome());
 
             jtfQtdEstoque.setText(obj.getEmail());
- 
+
             jcbFornecedor.setSelectedItem(obj.getUf());
-            
+
             jtfDescricao.setEnabled(true);
-  
+
             jtfQtdEstoque.setEnabled(true);
 
             jcbFornecedor.setEnabled(true);
             jBtnPesquisar.setEnabled(true);
-            
+
             jBtnEditar.setEnabled(true);
             jBtnExcluir.setEnabled(true);
             jBtnSalvar.setEnabled(false);
@@ -633,13 +640,24 @@ public class FrmProdutos extends javax.swing.JFrame {
         // Carregando ComboBox Fornecedores
         FornecedorDAO dao = new FornecedorDAO();
         List<Fornecedor> listaDeFornecedores = dao.listarFornecedor();
-        
+
         jcbFornecedor.removeAll();
-        
+
         for (Fornecedor f : listaDeFornecedores) {
             jcbFornecedor.addItem(f);
         }
     }//GEN-LAST:event_jcbFornecedorAncestorAdded
+
+    private void jcbFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbFornecedorMouseClicked
+//        FornecedorDAO dao = new FornecedorDAO();
+//        List<Fornecedor> listaDeFornecedores = dao.listarFornecedor();
+
+        jcbFornecedor.removeAll();
+
+//        for (Fornecedor f : listaDeFornecedores) {
+//            jcbFornecedor.addItem(f);
+//        }
+    }//GEN-LAST:event_jcbFornecedorMouseClicked
 
     /**
      * @param args the command line arguments
@@ -696,7 +714,7 @@ public class FrmProdutos extends javax.swing.JFrame {
     private javax.swing.JPanel jPnConsulta;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTblConsultaProduto;
-    private javax.swing.JTabbedPane jTpClientes;
+    private javax.swing.JTabbedPane jTpProdutos;
     private javax.swing.JComboBox jcbFornecedor;
     private javax.swing.JTextField jtfCodigo;
     private javax.swing.JTextField jtfConsultaNome;

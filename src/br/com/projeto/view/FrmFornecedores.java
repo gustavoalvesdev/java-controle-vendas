@@ -69,7 +69,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTpClientes = new javax.swing.JTabbedPane();
+        jTpFornecedores = new javax.swing.JTabbedPane();
         jPnCadastro = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtfCodigo = new javax.swing.JTextField();
@@ -372,7 +372,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
                             .addComponent(jLabel13)))))
         );
 
-        jTpClientes.addTab("Dados Pessoais", jPnCadastro);
+        jTpFornecedores.addTab("Dados Pessoais", jPnCadastro);
 
         jPnConsulta.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -432,7 +432,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        jTpClientes.addTab("Consulta de Fornecedores", jPnConsulta);
+        jTpFornecedores.addTab("Consulta de Fornecedores", jPnConsulta);
 
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/new-32.png"))); // NOI18N
@@ -477,7 +477,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTpClientes)
+            .addComponent(jTpFornecedores)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(211, 211, 211)
                 .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -497,7 +497,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTpClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTpFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBtnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -634,7 +634,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
 
         // Pega os dados
         try {
-            jTpClientes.setSelectedIndex(0);
+            jTpFornecedores.setSelectedIndex(0);
 
             // CÓDIGO
             Object codigo = jTblConsultaFornecedor.getValueAt(jTblConsultaFornecedor.getSelectedRow(), 0);
@@ -855,7 +855,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
         String nome = jtfConsultaNome.getText();
 
         FornecedorDAO dao = new FornecedorDAO();
-        List<Fornecedor> lista = dao.buscarFornecedorPorNome(nome);
+        List<Fornecedor> lista = dao.pesquisaFornecedoresPorNome(nome);
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaFornecedor.getModel();
         dados.setNumRows(0);
 
@@ -1057,7 +1057,7 @@ public class FrmFornecedores extends javax.swing.JFrame {
     private javax.swing.JTextField jTfComplemento;
     private javax.swing.JTextField jTfEndereco;
     private javax.swing.JTextField jTfNumero;
-    private javax.swing.JTabbedPane jTpClientes;
+    private javax.swing.JTabbedPane jTpFornecedores;
     private javax.swing.JComboBox<String> jcbUf;
     private javax.swing.JTextField jtfCodigo;
     private javax.swing.JTextField jtfConsultaNome;
