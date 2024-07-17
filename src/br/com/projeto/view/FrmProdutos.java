@@ -25,31 +25,23 @@ public class FrmProdutos extends javax.swing.JFrame {
 
     public void listar() {
 
-        ClienteDAO dao = new ClienteDAO();
-        List<Cliente> lista = dao.listarClientes();
+        ProdutoDAO dao = new ProdutoDAO();
+        List<Produto> lista = dao.listarProdutos();
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaProduto.getModel();
         dados.setNumRows(0);
-
-        for (Cliente c : lista) {
-
-            dados.addRow(new Object[]{
+        
+        for (Produto c : lista) {
+            
+            dados.addRow(new Object[] {
                 c.getId(),
-                c.getNome(),
-                c.getRg(),
-                c.getCpf(),
-                c.getEmail(),
-                c.getCelular(),
-                c.getTelefone(),
-                c.getCep(),
-                c.getEndereco(),
-                c.getNumero(),
-                c.getBairro(),
-                c.getCidade(),
-                c.getComplemento(),
-                c.getUf()
+                c.getDescricao(),
+                c.getPreco(),
+                c.getQtdEstoque(),
+                c.getFornecedor().getNome()
             });
-
+            
         }
+        
     }
 
     /**
