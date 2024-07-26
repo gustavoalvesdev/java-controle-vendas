@@ -820,29 +820,34 @@ public class FrmFornecedores extends javax.swing.JFrame {
             int id = Integer.valueOf(jtfCodigo.getText());
 
             FornecedorDAO dao = new FornecedorDAO();
-            dao.excluirFornecedor(id);
 
-            new Utilitarios().limpaTela(jPnCadastro);
+            if (dao.verificarSeFornecedorTemProduto(id)) {
+                JOptionPane.showMessageDialog(null, "Erro: há um produto em estoque cadastrado com este fornecedor!");
+            } else {
+                dao.excluirFornecedor(id);
 
-            jtfNome.setEnabled(false);
-            jFtfCnpj.setEnabled(false);
+                new Utilitarios().limpaTela(jPnCadastro);
 
-            jtfEmail.setEnabled(false);
-            jFtfCelular.setEnabled(false);
-            jFtfTelefone.setEnabled(false);
-            jFtfCep.setEnabled(false);
-            jTfEndereco.setEnabled(false);
-            jTfNumero.setEnabled(false);
-            jTfBairro.setEnabled(false);
-            jTfCidade.setEnabled(false);
-            jTfComplemento.setEnabled(false);
-            jcbUf.setEnabled(false);
-            jBtnBuscarPorCnpj.setEnabled(false);
+                jtfNome.setEnabled(false);
+                jFtfCnpj.setEnabled(false);
 
-            jBtnSalvar.setEnabled(false);
-            jBtnEditar.setEnabled(false);
-            jBtnExcluir.setEnabled(false);
-            jBtnNovo.setEnabled(true);
+                jtfEmail.setEnabled(false);
+                jFtfCelular.setEnabled(false);
+                jFtfTelefone.setEnabled(false);
+                jFtfCep.setEnabled(false);
+                jTfEndereco.setEnabled(false);
+                jTfNumero.setEnabled(false);
+                jTfBairro.setEnabled(false);
+                jTfCidade.setEnabled(false);
+                jTfComplemento.setEnabled(false);
+                jcbUf.setEnabled(false);
+                jBtnBuscarPorCnpj.setEnabled(false);
+
+                jBtnSalvar.setEnabled(false);
+                jBtnEditar.setEnabled(false);
+                jBtnExcluir.setEnabled(false);
+                jBtnNovo.setEnabled(true);
+            }
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());

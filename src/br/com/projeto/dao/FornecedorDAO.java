@@ -274,5 +274,23 @@ public class FornecedorDAO {
 
         return fornecedor;
     }
+    
+    public boolean verificarSeFornecedorTemProduto(int forId) {
+        
+        try {
+            String sql = "SELECT * FROM tb_produtos WHERE for_id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, forId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar fornecedor: " + e.getMessage());
+        }
+        
+        return false;
+    }
 
 }
