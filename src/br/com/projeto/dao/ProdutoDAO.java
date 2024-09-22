@@ -45,7 +45,8 @@ public class ProdutoDAO {
             
             List<Produto> lista = new ArrayList<>();
             
-            String sql = "SELECT p.id, p.descricao, p.preco, p.qtd_estoque, f.nome FROM tb_produtos as p INNER JOIN tb_fornecedores AS f ON (p.for_id = f.id)";
+            String sql = "SELECT p.id, p.descricao, p.preco, p.qtd_estoque, f.nome "
+                    + "FROM tb_produtos as p INNER JOIN tb_fornecedores AS f ON (p.for_id = f.id) ORDER BY p.id";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             
@@ -116,5 +117,43 @@ public class ProdutoDAO {
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao Excluir Produto: " + erro.getMessage());
         }
+    }
+    
+    // Método buscar produtos por nome
+    public List<Produto> listarProdutosPorNome(String nome) {
+        
+        try {
+            
+            List<Produto> lista = new ArrayList<>();
+            
+            String sql = "SELECT p.id, p.descricao, p.preco, p.qtd_estoque, f.nome "
+                    + "FROM tb_produtos as p INNER JOIN tb_fornecedores AS f ON (p.for_id = f.id) where p.descricao like ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%" + nome + "%");
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                Produto obj = new Produto();
+                Fornecedor f = new Fornecedor();
+                
+                obj.setId(rs.getInt("p.id"));
+                obj.setDescricao(rs.getString("p.descricao"));
+                obj.setPreco(rs.getDouble("p.preco"));
+                obj.setQtdEstoque(rs.getInt("p.qtd_estoque"));
+                
+                f.setNome(rs.getString("f.nome"));
+                
+                obj.setFornecedor(f);
+                
+                lista.add(obj);
+            }
+            
+            return lista;
+            
+        } catch(SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + erro.getMessage());
+            return null;
+        }
+        
     }
 }

@@ -165,11 +165,13 @@ public class FrmClientes extends javax.swing.JFrame {
         jLabel3.setText("Nome:");
 
         jtfNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtfNome.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("E-mail:");
 
         jtfEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jtfEmail.setEnabled(false);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Celular:");
@@ -179,6 +181,7 @@ public class FrmClientes extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFtfCelular.setEnabled(false);
         jFtfCelular.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -189,6 +192,7 @@ public class FrmClientes extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFtfTelefone.setEnabled(false);
         jFtfTelefone.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -199,6 +203,7 @@ public class FrmClientes extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFtfCep.setEnabled(false);
         jFtfCep.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jFtfCep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,38 +223,45 @@ public class FrmClientes extends javax.swing.JFrame {
         jLabel8.setText("Endereço:");
 
         jTfEndereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTfEndereco.setEnabled(false);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Número:");
 
         jTfNumero.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTfNumero.setEnabled(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Bairro:");
 
         jTfBairro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTfBairro.setEnabled(false);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Cidade:");
 
         jTfCidade.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTfCidade.setEnabled(false);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Complemento:");
 
         jTfComplemento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTfComplemento.setEnabled(false);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("UF:");
 
         jcbUf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcbUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+        jcbUf.setEnabled(false);
 
         try {
             jFtfRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-*")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFtfRg.setEnabled(false);
         jFtfRg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -263,6 +275,7 @@ public class FrmClientes extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFtfCpf.setEnabled(false);
         jFtfCpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jBtnBuscarPorCPF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
@@ -468,7 +481,6 @@ public class FrmClientes extends javax.swing.JFrame {
         jBtnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/new-32.png"))); // NOI18N
         jBtnNovo.setText("NOVO");
-        jBtnNovo.setEnabled(false);
         jBtnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnNovoActionPerformed(evt);
@@ -478,6 +490,7 @@ public class FrmClientes extends javax.swing.JFrame {
         jBtnSalvar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/save-32.png"))); // NOI18N
         jBtnSalvar.setText("SALVAR");
+        jBtnSalvar.setEnabled(false);
         jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSalvarActionPerformed(evt);
@@ -497,6 +510,7 @@ public class FrmClientes extends javax.swing.JFrame {
         jBtnExcluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete-32.png"))); // NOI18N
         jBtnExcluir.setText("EXCLUIR");
+        jBtnExcluir.setEnabled(false);
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnExcluirActionPerformed(evt);
