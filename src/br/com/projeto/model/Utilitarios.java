@@ -29,6 +29,23 @@ public class Utilitarios {
         }
     }
     
+    public void limpaTelaProdutos(JPanel container) throws NullPointerException {
+        Component components[] = container.getComponents();
+        
+        for (Component component : components) {
+            
+            if (component instanceof JTextField) {
+                ((JTextField) component).setText(null);
+            }
+            
+            if (component instanceof JComboBox) {
+                //((JComboBox) component).setSelectedItem(null);
+            }
+            
+        }
+    }
+    
+    
     public static void converteEmMaiusculo(JTextComponent component) throws NullPointerException {
         ((AbstractDocument) component.getDocument()).setDocumentFilter(new DocumentFilter() {
             @Override

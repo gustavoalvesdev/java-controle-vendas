@@ -463,46 +463,57 @@ public class FrmProdutos extends javax.swing.JFrame {
 
     private void jTblConsultaProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblConsultaProdutoMouseClicked
 
-        // Pega os dados
         try {
+            
             jTpProdutos.setSelectedIndex(0);
             jtfCodigo.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 0).toString());
             jtfDescricao.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 1).toString());
             jtfPreco.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 2).toString());
             jtfQtdEstoque.setText(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 3).toString());
             
-            //jcbFornecedor.setSelectedItem(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 13).toString());
-            Fornecedor f = new Fornecedor();
+            String nomeFornecedorProduto = jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 4).toString();
+            
+            
+            
             FornecedorDAO dao = new FornecedorDAO();
-            f = dao.buscarFornecedorPorNome(jTblConsultaProduto.getValueAt(jTblConsultaProduto.getSelectedRow(), 4).toString());
-            
-            
             List<Fornecedor> listaDeFornecedores = dao.listarFornecedor();
-    
-            jcbFornecedor.removeAllItems();
-
-            for (Fornecedor fr : listaDeFornecedores) {
-                jcbFornecedor.addItem(fr);
-            };
             
-            jcbFornecedor.getModel().setSelectedItem(f);
+            jcbFornecedor.removeAllItems();
+            
+            Fornecedor fornecedorSelecionado = null;
 
-            //jcbFornecedor.removeAllItems();
-            //jcbFornecedor.getModel().setSelectedItem(f);
+            
+            for (Fornecedor fr: listaDeFornecedores) {
+                
+               if (fr.getNome().equals(nomeFornecedorProduto)) {
+                   jcbFornecedor.addItem(fr);
+               } 
+               
+            }
+            
+            for (Fornecedor fr: listaDeFornecedores) {
+                
+               if (!fr.getNome().equals(nomeFornecedorProduto)) {
+                   jcbFornecedor.addItem(fr);
+               } 
+               
+            }
 
+            
+            if (fornecedorSelecionado != null) {
+                jcbFornecedor.setSelectedItem(fornecedorSelecionado.toString());
+            }
+            
             jtfDescricao.setEnabled(true);
-
             jtfQtdEstoque.setEnabled(true);
-
             jcbFornecedor.setEnabled(true);
             jBtnPesquisar.setEnabled(true);
-
             jBtnNovo.setEnabled(true);
             jBtnEditar.setEnabled(true);
             jBtnExcluir.setEnabled(true);
             jBtnSalvar.setEnabled(false);
-
-        } catch (ArrayIndexOutOfBoundsException e) {
+            
+        } catch(ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(null, "Nenhuma linha foi selecionada!");
         }
 
@@ -581,22 +592,31 @@ public class FrmProdutos extends javax.swing.JFrame {
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaProduto.getModel();
         dados.setNumRows(0);
 
-        for (Produto p: lista) {
+        for (Produto p : lista) {
             dados.addRow(new Object[]{
-            
                 p.getId(),
                 p.getDescricao(),
                 p.getPreco(),
                 p.getQtdEstoque(),
                 p.getFornecedor().getNome()
-                
+
             });
         }
 
     }//GEN-LAST:event_jtfConsultaNomeKeyPressed
 
     private void jBtnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNovoActionPerformed
-        new Utilitarios().limpaTela(jPnCadastro);
+        
+        FornecedorDAO dao = new FornecedorDAO();;
+        List<Fornecedor> listaDeFornecedores = dao.listarFornecedor();
+
+        jcbFornecedor.removeAllItems();
+
+        for (Fornecedor f : listaDeFornecedores) {
+            jcbFornecedor.addItem(f);
+        };
+        
+        new Utilitarios().limpaTelaProdutos(jPnCadastro);
 
         jtfDescricao.requestFocus();
         jBtnNovo.setEnabled(false);
@@ -614,31 +634,30 @@ public class FrmProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnNovoActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        
+
         String nome = "%" + jtfDescricao.getText() + "%";
-            
+
         ProdutoDAO dao = new ProdutoDAO();
         List<Produto> lista = dao.listarProdutosPorNome(nome);
-        
+
         DefaultTableModel dados = (DefaultTableModel) jTblConsultaProduto.getModel();
         dados.setNumRows(0);
-        
-        for (Produto p: lista) {
+
+        for (Produto p : lista) {
             dados.addRow(new Object[]{
-            
                 p.getId(),
                 p.getDescricao(),
                 p.getPreco(),
                 p.getQtdEstoque(),
                 p.getFornecedor().getNome()
-                
+
             });
         }
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jcbFornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jcbFornecedorAncestorAdded
         // Carregando ComboBox Fornecedores
-//        FornecedorDAO dao = new FornecedorDAO();
+//        FornecedorDAO dao = new FornecedorDAO();;
 //        List<Fornecedor> listaDeFornecedores = dao.listarFornecedor();
 //
 //        jcbFornecedor.removeAllItems();
