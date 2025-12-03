@@ -23,7 +23,11 @@ public class Utilitarios {
             }
             
             if (component instanceof JComboBox) {
-                ((JComboBox) component).setSelectedIndex(0);
+                JComboBox<?> comboBox = (JComboBox<?>) component;
+                
+                if (comboBox.getItemCount() > 0) {
+                    comboBox.setSelectedIndex(0);
+                }
             }
             
         }

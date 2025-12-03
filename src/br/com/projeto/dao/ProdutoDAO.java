@@ -156,4 +156,43 @@ public class ProdutoDAO {
         }
         
     }
+    
+    public Produto consultaPorNome(String nome) {
+        
+        try {
+            
+            Produto obj = new Produto();
+            
+            String sql = "SELECT p.id, p.descricao, p.preco, p.qtd_estoque, f.nome "
+                    + "FROM tb_produtos as p INNER JOIN tb_fornecedores AS f ON " 
+                    + "(p.for_id = f.id) where p.descricao = ?";
+            
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+      
+                Fornecedor f = new Fornecedor();
+                
+                obj.setId(rs.getInt("p.id"));
+                obj.setDescricao(rs.getString("p.descricao"));
+                obj.setPreco(rs.getDouble("p.preco"));
+                obj.setQtdEstoque(rs.getInt("p.qtd_estoque"));
+                
+                f.setNome(rs.getString("f.nome"));
+                
+                obj.setFornecedor(f);
+                
+                
+            }
+            
+            return obj;
+            
+        } catch(SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar produtos: " + erro.getMessage());
+            return null;
+        }
+        
+    }
 }

@@ -172,6 +172,7 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search-24.png"))); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.setEnabled(false);
         jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnPesquisarActionPerformed(evt);
@@ -576,6 +577,8 @@ public class FrmProdutos extends javax.swing.JFrame {
             jBtnEditar.setEnabled(false);
             jBtnExcluir.setEnabled(false);
             jBtnNovo.setEnabled(true);
+            
+            
 
         } catch (NumberFormatException erro) {
             JOptionPane.showMessageDialog(null, "Falha ao receber dados para exclusão: " + erro.getMessage());
@@ -631,29 +634,8 @@ public class FrmProdutos extends javax.swing.JFrame {
 
         jcbFornecedor.setEnabled(true);
         jBtnPesquisar.setEnabled(true);
+        jBtnPesquisar.setEnabled(true);
     }//GEN-LAST:event_jBtnNovoActionPerformed
-
-    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-
-        String nome = "%" + jtfDescricao.getText() + "%";
-
-        ProdutoDAO dao = new ProdutoDAO();
-        List<Produto> lista = dao.listarProdutosPorNome(nome);
-
-        DefaultTableModel dados = (DefaultTableModel) jTblConsultaProduto.getModel();
-        dados.setNumRows(0);
-
-        for (Produto p : lista) {
-            dados.addRow(new Object[]{
-                p.getId(),
-                p.getDescricao(),
-                p.getPreco(),
-                p.getQtdEstoque(),
-                p.getFornecedor().getNome()
-
-            });
-        }
-    }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jcbFornecedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jcbFornecedorAncestorAdded
         // Carregando ComboBox Fornecedores
@@ -668,15 +650,46 @@ public class FrmProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbFornecedorAncestorAdded
 
     private void jcbFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jcbFornecedorMouseClicked
-//        FornecedorDAO dao = new FornecedorDAO();
-//        List<Fornecedor> listaDeFornecedores = dao.listarFornecedor();
-
-        jcbFornecedor.removeAll();
-
-//        for (Fornecedor f : listaDeFornecedores) {
-//            jcbFornecedor.addItem(f);
-//        }
+        FornecedorDAO dao = new FornecedorDAO();
+        List<Fornecedor> listaDeFornecedores = dao.listarFornecedor();
+        jcbFornecedor.removeAllItems();
+        
+        for (Fornecedor f: listaDeFornecedores) {
+            jcbFornecedor.addItem(f);
+        }
     }//GEN-LAST:event_jcbFornecedorMouseClicked
+
+    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
+
+        String nome = jtfDescricao.getText();
+        Produto obj = new Produto();
+        ProdutoDAO dao = new ProdutoDAO();
+
+        obj = dao.consultaPorNome(nome);
+
+        jcbFornecedor.removeAllItems();
+
+        if (obj.getDescricao() != null) {
+            jtfCodigo.setText(String.valueOf(obj.getId()));
+            jtfDescricao.setText(obj.getDescricao());
+            jtfPreco.setText(String.valueOf(obj.getPreco()));
+            jtfQtdEstoque.setText(String.valueOf(obj.getQtdEstoque()));
+
+            Fornecedor f = new Fornecedor();
+            FornecedorDAO fDao = new FornecedorDAO();
+
+            f = fDao.consultaPorNome(obj.getFornecedor().getNome());
+
+            jcbFornecedor.getModel().setSelectedItem(f);
+            
+            jBtnSalvar.setEnabled(false);
+            
+            jBtnEditar.setEnabled(true);
+            jBtnExcluir.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Produto não encontrado!");
+        }
+    }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments

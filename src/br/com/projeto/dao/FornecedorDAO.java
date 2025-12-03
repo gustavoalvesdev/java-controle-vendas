@@ -198,6 +198,49 @@ public class FornecedorDAO {
 
         return null;
     }
+    
+    public Fornecedor consultaPorNome(String cnpj) {
+
+        try {
+
+            String sql = "SELECT * FROM " + tabela + " WHERE nome = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, cnpj);
+
+            ResultSet rs = stmt.executeQuery();
+
+            Fornecedor obj = new Fornecedor();
+
+            if (rs.next()) {
+
+                obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCnpj(rs.getString("cnpj"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setUf(rs.getString("estado"));
+
+                return obj;
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Fornecedor não encontrado!");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao buscar por CNPJ: " + e.getMessage());
+        }
+
+        return null;
+    }
+
 
     public List<Fornecedor> pesquisaFornecedoresPorNome(String nome) {
         try {
